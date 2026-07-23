@@ -19,19 +19,29 @@
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     background-color: var(--color-surface);
     color: var(--color-text-primary);
-    scroll-behavior: smooth;
     overflow-x: hidden;
     font-family: var(--font-sans);
   }
 
+  /* Offset sections for fixed navbar (56px = h-14) */
+  section[id] {
+    scroll-margin-top: 56px;
+  }
+
   @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto !important;
+    }
     *,
     *::before,
     *::after {
-      scroll-behavior: auto !important;
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;

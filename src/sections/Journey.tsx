@@ -15,14 +15,14 @@ interface TimelineNode {
 
 const nodes: TimelineNode[] = [
   {
-    period: '2018 – 2021',
+    period: 'Sep 2021 – May 2024',
     title: 'Nguyen Tat Thanh High School for the Gifted',
     subtitle: 'IT Specialization',
     story:
       'Started programming seriously here. Our class was IT-specialized, which meant more theory than most high schools — but it gave me the foundations I actually needed when things got harder later.',
     chips: [
-      { label: '1st Prize – Provincial Science & Engineering Fair 23–24' },
-      { label: 'National Participant – Science & Engineering Fair 23–24' },
+      { label: '1st Prize – Provincial Science & Engineering Fair 2023–2024' },
+      { label: 'National Participant – Science & Engineering Fair 2023–2024' },
     ],
     featuredImage: {
       src: '/images/achievements/highschool-provincial.jpg',
@@ -33,30 +33,36 @@ const nodes: TimelineNode[] = [
     ],
   },
   {
-    period: '2021 – Present',
+    period: 'Sep 2024 – Aug 2027 (Expected)',
     title: 'FPT University Ho Chi Minh City',
     subtitle: 'Bachelor of Software Engineering',
     story:
-      'University is where everything accelerated. Between coursework, competitive programming, and organizing tech events, I learned more by doing than by studying. ICPC pushed my algorithmic thinking further than any class could. Leading GDGoC gave me my first real experience running something — planning events, coordinating people, and making things happen for a community.',
+  'University became the place where theory turned into practice. Beyond coursework, I challenged myself through competitive programming, hackathons, community leadership, and real-world software development. ICPC strengthened my algorithmic thinking, hackathons taught me rapid product iteration, and leading GDGoC helped me develop communication and organizational skills alongside technical growth.',
     chips: [
-      { label: '3rd Prize – FPTU Hackathon Summer 2025' },
-      { label: 'ICPC 2025–2026 Regional (HCMC)' },
-      { label: 'ICPC 2025–2026 National' },
-      { label: 'Chapter Lead – GDGoC FPTU HCMC' },
-      { label: 'Google Hackathon Participant' },
-      { label: 'AI Naver Hackathon Participant' },
+      { label: 'FPT University Merit Scholarship' },
+      { label: 'ICPC Asia HCMC Regional 2025 • Top 59' },
+      { label: 'ICPC Vietnam National 2025 • Top 171' },
+      { label: 'ICPC Vietnam Southern Provincial 2025 • Top 18' },
+      { label: 'Top 3 • AI Innovation Hackathon 2025' },
+      { label: 'Chapter Lead • GDGoC FPTU HCMC' },
     ],
     featuredImage: {
-      src: '/images/achievements/icpc-2025.jpg',
-      caption: 'ICPC 2025–2026',
+      src: '/images/achievements/ai-innovation-hackathon-2025.jpg',
+      caption: 'AI Innovation Hackathon 2025 – Top 3',
     },
     thumbs: [
-      { src: '/images/achievements/hackathon-fptu-summer2025.jpg', caption: 'FPTU Hackathon 2025' },
-      { src: '/images/achievements/gdgoc-event.jpg', caption: 'GDGoC Event' },
-    ],
+    {
+      src: '/images/achievements/icpc-regional-2025.jpg',
+      caption: 'ICPC Asia HCMC Regional 2025',
+    },
+    {
+      src: '/images/community/gdgoc-fptu.jpg',
+      caption: 'GDGoC FPTU HCMC',
+    },
+  ],
   },
   {
-    period: '2026 – Present',
+    period: 'May 2026 – Aug 2026',
     title: 'FPT Software',
     subtitle: 'Software Engineer Intern',
     story:

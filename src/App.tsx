@@ -9,8 +9,8 @@ import { Projects } from './sections/Projects';
 import { Tech } from './sections/Tech';
 // import { Thinking } from './sections/Thinking';
 import { Achievements } from './sections/Achievements';
-import { Community } from './sections/Community';
-import { Current } from './sections/Current';
+// import { Community } from './sections/Community';
+// import { Current } from './sections/Current';
 import { Contact } from './sections/Contact';
 
 function App() {
@@ -27,8 +27,8 @@ function App() {
         <Tech />
         {/* <Thinking /> */}
         <Achievements />
-        <Community />
-        <Current />
+        {/* <Community /> */}
+        {/* <Current /> */}
         <Contact />
       </main>
       <Footer />

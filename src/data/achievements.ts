@@ -1,66 +1,64 @@
+/**
+ * achievements.ts
+ *
+ * Source of truth for achievement metadata used by SEO / structured data.
+ * The Achievements.tsx section component contains its own richer inline
+ * data (descriptions, images) for rendering — this file is the canonical
+ * lightweight reference used by other parts of the app (e.g. SEO tags).
+ */
+
 export interface Achievement {
   id: string;
   title: string;
-  category: "Competitive Programming" | "Academic" | "Hackathon" | "Leadership";
-  description: string;
+  category: 'Competitive Programming' | 'Academic' | 'Hackathon' | 'Leadership';
+  result: string;           // e.g. "Top 59", "Top 3", "Scholarship recipient"
   organization: string;
   date: string;
-  learned?: string[];
-  image?: string;
-  certificate?: string;
-  link?: string;
+  team?: string;
 }
 
 export const achievements: Achievement[] = [
   {
-    id: "icpc-regional",
-    title: "ICPC Asia HCMC Regional Contest 2025",
-    category: "Competitive Programming",
-    description: "Top 59 out of hundreds of teams.",
-    organization: "ICPC",
-    date: "2025",
-    learned: [
-      "Dynamic Programming, Graph Theory, and Advanced Data Structures",
-      "Team collaboration and problem solving under intense time constraints"
-    ]
+    id: 'icpc-asia-hcmc-2025',
+    title: 'ICPC Asia Ho Chi Minh City Regional Contest 2025',
+    category: 'Competitive Programming',
+    result: 'Top 59',
+    organization: 'ICPC',
+    date: 'December 2025',
+    team: 'FPTU HCM – Dolphin',
   },
   {
-    id: "icpc-national",
-    title: "ICPC Vietnam National Contest 2025",
-    category: "Competitive Programming",
-    description: "Top 171 nationally.",
-    organization: "ICPC",
-    date: "2025",
-    learned: [
-      "Rigorous algorithm analysis and Big-O complexity"
-    ]
+    id: 'icpc-national-2025',
+    title: 'ICPC Vietnam National Programming Contest 2025',
+    category: 'Competitive Programming',
+    result: 'Top 171',
+    organization: 'ICPC Vietnam',
+    date: 'November 2025',
+    team: 'FPTU HCM – Dolphin',
   },
   {
-    id: "icpc-provincial",
-    title: "ICPC Southern Provincial Contest 2025",
-    category: "Competitive Programming",
-    description: "Top 18 regionally.",
-    organization: "ICPC",
-    date: "2025",
+    id: 'icpc-southern-2025',
+    title: 'ICPC Vietnam Southern Provincial Contest 2025',
+    category: 'Competitive Programming',
+    result: 'Top 18',
+    organization: 'ICPC Vietnam',
+    date: 'October 2025',
+    team: 'FPTU HCM – Dolphin',
   },
   {
-    id: "fpt-scholarship",
-    title: "FPT University Talent Scholarship",
-    category: "Academic",
-    description: "Awarded 70% talent scholarship.",
-    organization: "FPT University",
-    date: "2023",
+    id: 'ai-hackathon-fptu-2025',
+    title: 'AI Innovation Hackathon 2025',
+    category: 'Hackathon',
+    result: 'Top 3 · Team Leader',
+    organization: 'FPT University',
+    date: '2025',
   },
   {
-    id: "ai-hackathon",
-    title: "AI Innovation Hackathon FPTU 2025",
-    category: "Hackathon",
-    description: "Top 3 Finalist.",
-    organization: "FPT University",
-    date: "2025",
-    learned: [
-      "Rapid prototyping and iterative development",
-      "Integrating AI APIs into full-stack applications"
-    ]
-  }
+    id: 'fpt-scholarship',
+    title: 'FPT University Scholarship',
+    category: 'Academic',
+    result: 'Merit-based scholarship recipient',
+    organization: 'FPT University',
+    date: '2021 – Present',
+  },
 ];

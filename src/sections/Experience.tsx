@@ -102,43 +102,6 @@ export function Experience() {
           </span>
         </div>
 
-        {/* Development Lifecycle */}
-        <div className="mb-6 p-4 rounded-xl bg-surface-elevated/30 border border-glass-border">
-          <h4 className="font-mono text-primary mb-4 uppercase tracking-widest text-[11px]">
-            Development Lifecycle
-          </h4>
-          <div className="flex flex-col sm:flex-row items-center gap-0 overflow-x-auto scrollbar-hide">
-            {lifecycleSteps.map((step, i) => (
-              <div key={step.label} className="flex flex-col sm:flex-row items-center flex-1 min-w-0">
-                {/* Step node */}
-                <div className="flex flex-col items-center text-center group flex-shrink-0">
-                  <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/30 flex items-center justify-center mb-1.5 group-hover:bg-primary/20 group-hover:border-primary/60 transition-all duration-200">
-                    <span className="material-symbols-outlined text-primary text-[18px]">{step.icon}</span>
-                  </div>
-                  <span className="font-mono text-[10px] text-text-secondary leading-tight whitespace-pre-line max-w-[72px]">
-                    {step.label}
-                  </span>
-                </div>
-
-                {/* Arrow connector (not after last step) */}
-                {i < lifecycleSteps.length - 1 && (
-                  <div className="flex flex-col sm:flex-row items-center my-2 sm:my-0 sm:mx-2 flex-1">
-                    {/* vertical line on mobile */}
-                    <div className="sm:hidden w-px h-4 bg-gradient-to-b from-primary/50 to-primary/20" />
-                    {/* horizontal line on desktop */}
-                    <div className="hidden sm:block h-px flex-1 bg-gradient-to-r from-primary/40 to-primary/10" />
-                    <span className="material-symbols-outlined text-primary/40 text-[14px] sm:rotate-0 rotate-90 sm:mx-0.5">
-                      arrow_forward
-                    </span>
-                    <div className="hidden sm:block h-px flex-1 bg-gradient-to-r from-primary/10 to-primary/40" />
-                    <div className="sm:hidden w-px h-4 bg-gradient-to-b from-primary/20 to-primary/50" />
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-
         <div className="grid md:grid-cols-3 gap-6">
           {/* Main content */}
           <div className="md:col-span-2 space-y-5">

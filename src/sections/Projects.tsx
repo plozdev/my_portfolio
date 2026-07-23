@@ -175,10 +175,10 @@ export function Projects() {
                     {tekcitym.architecture}
                   </span>
                 </div>
-                <h3 className="font-sans text-[42px] md:text-[52px] font-bold text-primary leading-none tracking-tight mb-3">
+                <h3 className="font-sans text-3xl md:text-[40px] font-bold text-primary leading-tight tracking-tight mb-3">
                   {tekcitym.name}
                 </h3>
-                <p className="text-text-secondary font-body text-lg max-w-xl leading-relaxed">
+                <p className="text-text-secondary font-body text-sm max-w-xl leading-relaxed">
                   {tekcitym.overview}
                 </p>
               </div>
@@ -285,7 +285,7 @@ export function Projects() {
                 <div className="space-y-4">
                   <div>
                     <p className="font-mono text-[10px] text-text-secondary uppercase tracking-wider mb-1">Pattern</p>
-                    <p className="font-sans text-[20px] font-bold text-primary">{tekcitym.architecture}</p>
+                    <p className="font-sans text-base font-bold text-primary">{tekcitym.architecture}</p>
                   </div>
                   <p className="text-text-secondary font-body text-sm leading-relaxed">
                     A modular monolith was chosen deliberately over microservices. At the current scale, the overhead of distributed transactions, service discovery, and inter-service latency would add complexity without proportional benefit. Modules are kept strictly bounded so migration to microservices remains a viable future path.
@@ -385,7 +385,7 @@ export function Projects() {
         </div>
 
         {/* ── SECONDARY: Private Project ── */}
-        <div className="glass-card rounded-xl p-6 border border-dashed border-glass-border/60 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 opacity-70 hover:opacity-90 transition-opacity">
+        {/* <div className="glass-card rounded-xl p-6 border border-dashed border-glass-border/60 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 opacity-70 hover:opacity-90 transition-opacity">
           <div className="flex items-center gap-4">
             <div className="w-10 h-10 rounded-lg bg-surface-elevated/50 border border-glass-border flex items-center justify-center shrink-0">
               <span className="material-symbols-outlined text-text-secondary/50 text-[18px]">lock</span>
@@ -400,7 +400,7 @@ export function Projects() {
           <span className="px-3 py-1 border border-glass-border text-text-secondary/60 font-mono text-[10px] rounded-full uppercase shrink-0">
             In Progress
           </span>
-        </div>
+        </div> */}
 
       </div>
     </AnimatedSection>
