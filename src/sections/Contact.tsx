@@ -8,9 +8,7 @@ const github    = socials.find(s => s.platform === 'GitHub')?.href  ?? '';
 const linkedin  = socials.find(s => s.platform === 'LinkedIn')?.href ?? '';
 const resumeUrl = '/documents/resume.pdf';
 
-const mailtoHref = `mailto:${email}?subject=${encodeURIComponent('Portfolio Contact')}&body=${encodeURIComponent(
-  'Hi Hoang,\n\nI came across your portfolio and wanted to reach out.\n\n'
-)}`;
+
 
 /* ── Sub-components ──────────────────────────────────────────────── */
 

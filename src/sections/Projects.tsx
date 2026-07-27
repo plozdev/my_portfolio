@@ -143,64 +143,64 @@ function GallerySlot({ src, label }: { src: string; label: string }) {
 
 export function Projects() {
   return (
-    <AnimatedSection id="projects" className="py-16 bg-background-deep relative">
-      <div className="max-w-[1300px] mx-auto px-5 md:px-8">
+    <AnimatedSection id="projects" className="py-14 bg-background-deep relative">
+      <div className="max-w-5xl mx-auto px-5 md:px-8">
 
         {/* Section header */}
-        <div className="mb-8">
-          <h2 className="font-sans text-3xl leading-tight font-bold text-primary">
+        <div className="mb-6">
+          <h2 className="font-sans text-2xl md:text-3xl leading-tight font-bold text-primary">
             Projects
           </h2>
-          <p className="text-text-secondary mt-1.5 font-body text-sm max-w-xl">
+          <p className="text-text-secondary mt-1 font-body text-sm max-w-xl">
             Engineering work that reflects how I think about system design and trade-offs — not just features.
           </p>
         </div>
 
         {/* ── FEATURED PROJECT: TekcitYm ── */}
-        <div className="glass-card rounded-2xl overflow-hidden border border-glass-border mb-5">
+        <div className="glass-card rounded-xl overflow-hidden border border-glass-border mb-4">
 
           {/* ① Banner strip */}
-          <div className="relative h-2 bg-gradient-to-r from-primary via-secondary to-primary" />
+          <div className="relative h-1.5 bg-gradient-to-r from-primary via-secondary to-primary" />
 
-          <div className="p-6 md:p-9 space-y-10">
+          <div className="p-4 md:p-6 space-y-6">
 
             {/* ② Project identity + status */}
-            <div className="flex flex-col md:flex-row md:items-start justify-between gap-6">
+            <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
               <div>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  <span className="px-3 py-1 bg-primary text-surface font-mono text-[10px] rounded-full uppercase font-bold">
+                <div className="flex flex-wrap gap-1.5 mb-2">
+                  <span className="px-2 py-0.5 bg-primary text-surface font-mono text-[9px] rounded-full uppercase font-bold">
                     Active Build
                   </span>
-                  <span className="px-3 py-1 bg-surface-variant/80 text-primary font-mono text-[10px] rounded-full uppercase border border-primary/20">
+                  <span className="px-2 py-0.5 bg-surface-variant/80 text-primary font-mono text-[9px] rounded-full uppercase border border-primary/20">
                     {tekcitym.architecture}
                   </span>
                 </div>
-                <h3 className="font-sans text-3xl md:text-[40px] font-bold text-primary leading-tight tracking-tight mb-3">
+                <h3 className="font-sans text-xl md:text-2xl font-bold text-primary leading-tight tracking-tight mb-1.5">
                   {tekcitym.name}
                 </h3>
-                <p className="text-text-secondary font-body text-sm max-w-xl leading-relaxed">
+                <p className="text-text-secondary font-body text-xs md:text-[13px] max-w-lg leading-relaxed">
                   {tekcitym.overview}
                 </p>
               </div>
 
               {/* Progress panel */}
-              <div className="glass-card rounded-xl p-6 min-w-[220px] border border-primary/15 shrink-0">
-                <p className="font-mono text-[10px] text-text-secondary uppercase tracking-wider mb-5">
+              <div className="glass-card rounded-lg p-4 min-w-[200px] border border-primary/15 shrink-0">
+                <p className="font-mono text-[10px] text-text-secondary uppercase tracking-wider mb-3">
                   Build Progress
                 </p>
-                <div className="space-y-4">
+                <div className="space-y-3">
                   <div>
-                    <div className="flex justify-between items-center mb-1.5">
-                      <span className="font-mono text-[11px] text-text-secondary">Current Phase</span>
-                      <span className="font-mono text-[11px] text-secondary">{tekcitym.sprintProgress}%</span>
+                    <div className="flex justify-between items-center mb-1">
+                      <span className="font-mono text-[10px] text-text-secondary">Current Phase</span>
+                      <span className="font-mono text-[10px] text-secondary">{tekcitym.sprintProgress}%</span>
                     </div>
                     <ProgressBar value={tekcitym.sprintProgress} color="secondary" />
-                    <p className="font-mono text-[10px] text-text-secondary/60 mt-1">{tekcitym.currentPhase}</p>
+                    <p className="font-mono text-[9px] text-text-secondary/60 mt-1">{tekcitym.currentPhase}</p>
                   </div>
                   <div>
-                    <div className="flex justify-between items-center mb-1.5">
-                      <span className="font-mono text-[11px] text-text-secondary">Overall</span>
-                      <span className="font-mono text-[11px] text-primary">{tekcitym.overallProgress}%</span>
+                    <div className="flex justify-between items-center mb-1">
+                      <span className="font-mono text-[10px] text-text-secondary">Overall</span>
+                      <span className="font-mono text-[10px] text-primary">{tekcitym.overallProgress}%</span>
                     </div>
                     <ProgressBar value={tekcitym.overallProgress} color="primary" />
                   </div>
@@ -210,32 +210,32 @@ export function Projects() {
 
             {/* ③ Why this problem exists */}
             <div>
-              <h4 className="font-mono text-[11px] text-primary uppercase tracking-widest mb-4">
+              <h4 className="font-mono text-[10px] text-primary uppercase tracking-widest mb-2.5">
                 Why This Problem Exists
               </h4>
-              <blockquote className="border-l-4 border-primary/40 pl-6 text-text-primary font-body text-base leading-relaxed italic">
+              <blockquote className="border-l-2 border-primary/40 pl-4 text-text-primary font-body text-sm leading-relaxed italic">
                 {tekcitym.whyItExists}
               </blockquote>
             </div>
 
             {/* ④ Problems solved */}
             <div>
-              <h4 className="font-mono text-[11px] text-primary uppercase tracking-widest mb-6">
+              <h4 className="font-mono text-[10px] text-primary uppercase tracking-widest mb-4">
                 Problems Solved
               </h4>
-              <div className="grid sm:grid-cols-2 gap-4">
+              <div className="grid sm:grid-cols-2 gap-3">
                 {tekcitym.problemsSolved.map((p) => (
                   <div
                     key={p.title}
-                    className="bg-surface-elevated/30 border border-glass-border rounded-xl p-5 hover:border-primary/30 transition-colors"
+                    className="bg-surface-elevated/30 border border-glass-border rounded-lg p-4 hover:border-primary/30 transition-colors"
                   >
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="w-8 h-8 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
-                        <span className="material-symbols-outlined text-primary text-[16px]">{p.icon}</span>
+                    <div className="flex items-center gap-2.5 mb-2">
+                      <div className="w-7 h-7 rounded-md bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
+                        <span className="material-symbols-outlined text-primary text-[14px]">{p.icon}</span>
                       </div>
-                      <h5 className="font-sans font-bold text-text-primary text-sm">{p.title}</h5>
+                      <h5 className="font-sans font-bold text-text-primary text-xs md:text-sm">{p.title}</h5>
                     </div>
-                    <p className="text-text-secondary text-sm font-body leading-relaxed">{p.body}</p>
+                    <p className="text-text-secondary text-xs font-body leading-relaxed">{p.body}</p>
                   </div>
                 ))}
               </div>
@@ -243,10 +243,10 @@ export function Projects() {
 
             {/* ⑤ Engineering challenges */}
             <div>
-              <h4 className="font-mono text-[11px] text-primary uppercase tracking-widest mb-4">
+              <h4 className="font-mono text-[10px] text-primary uppercase tracking-widest mb-3">
                 Engineering Challenges
               </h4>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-1.5">
                 {tekcitym.engineeringChallenges.map((c) => (
                   <ChallengePill key={c.label} label={c.label} color={c.color} />
                 ))}
@@ -255,12 +255,12 @@ export function Projects() {
 
             {/* ⑥ Architecture */}
             <div>
-              <h4 className="font-mono text-[11px] text-primary uppercase tracking-widest mb-4">
+              <h4 className="font-mono text-[10px] text-primary uppercase tracking-widest mb-3">
                 Architecture
               </h4>
-              <div className="grid md:grid-cols-2 gap-6 items-start">
+              <div className="grid md:grid-cols-2 gap-5 items-start">
                 {/* Diagram slot */}
-                <div className="w-full h-56 rounded-xl overflow-hidden border border-glass-border bg-surface-elevated/30 flex items-center justify-center">
+                <div className="w-full h-44 rounded-lg overflow-hidden border border-glass-border bg-surface-elevated/30 flex items-center justify-center">
                   <img
                     src={tekcitym.architectureImage}
                     alt="TekcitYm architecture diagram"
@@ -270,11 +270,11 @@ export function Projects() {
                       const parent = e.currentTarget.parentElement;
                       if (parent) {
                         const ph = document.createElement('div');
-                        ph.className = 'flex flex-col items-center gap-3 text-center px-6';
+                        ph.className = 'flex flex-col items-center gap-2 text-center px-4';
                         ph.innerHTML = `
-                          <span class="material-symbols-outlined text-4xl text-primary/20">schema</span>
-                          <span class="font-mono text-[11px] text-text-secondary/40">Architecture diagram</span>
-                          <span class="font-mono text-[10px] text-text-secondary/30">/images/projects/tekcitym-arch.png</span>
+                          <span class="material-symbols-outlined text-3xl text-primary/20">schema</span>
+                          <span class="font-mono text-[10px] text-text-secondary/40">Architecture diagram</span>
+                          <span class="font-mono text-[9px] text-text-secondary/30">/images/projects/tekcitym-arch.png</span>
                         `;
                         parent.appendChild(ph);
                       }
@@ -282,18 +282,18 @@ export function Projects() {
                   />
                 </div>
                 {/* Explanation */}
-                <div className="space-y-4">
+                <div className="space-y-3">
                   <div>
-                    <p className="font-mono text-[10px] text-text-secondary uppercase tracking-wider mb-1">Pattern</p>
-                    <p className="font-sans text-base font-bold text-primary">{tekcitym.architecture}</p>
+                    <p className="font-mono text-[9px] text-text-secondary uppercase tracking-wider mb-0.5">Pattern</p>
+                    <p className="font-sans text-sm font-bold text-primary">{tekcitym.architecture}</p>
                   </div>
-                  <p className="text-text-secondary font-body text-sm leading-relaxed">
+                  <p className="text-text-secondary font-body text-xs leading-relaxed">
                     A modular monolith was chosen deliberately over microservices. At the current scale, the overhead of distributed transactions, service discovery, and inter-service latency would add complexity without proportional benefit. Modules are kept strictly bounded so migration to microservices remains a viable future path.
                   </p>
-                  <div className="flex flex-wrap gap-2 pt-1">
-                    <span className="px-2.5 py-1 bg-primary/10 border border-primary/20 rounded text-primary font-mono text-[10px]">Bounded Contexts</span>
-                    <span className="px-2.5 py-1 bg-primary/10 border border-primary/20 rounded text-primary font-mono text-[10px]">Single Deployable</span>
-                    <span className="px-2.5 py-1 bg-primary/10 border border-primary/20 rounded text-primary font-mono text-[10px]">Future-Migratable</span>
+                  <div className="flex flex-wrap gap-1.5 pt-0.5">
+                    <span className="px-2 py-0.5 bg-primary/10 border border-primary/20 rounded text-primary font-mono text-[9px]">Bounded Contexts</span>
+                    <span className="px-2 py-0.5 bg-primary/10 border border-primary/20 rounded text-primary font-mono text-[9px]">Single Deployable</span>
+                    <span className="px-2 py-0.5 bg-primary/10 border border-primary/20 rounded text-primary font-mono text-[9px]">Future-Migratable</span>
                   </div>
                 </div>
               </div>
@@ -301,19 +301,19 @@ export function Projects() {
 
             {/* ⑦ Tech Stack */}
             <div>
-              <h4 className="font-mono text-[11px] text-primary uppercase tracking-widest mb-6">
+              <h4 className="font-mono text-[10px] text-primary uppercase tracking-widest mb-4">
                 Technology Stack
               </h4>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
                 {tekcitym.stack.map((cat) => (
-                  <div key={cat.category} className="bg-surface-elevated/20 border border-glass-border rounded-xl p-4">
-                    <div className="flex items-center gap-2 mb-3">
-                      <span className="material-symbols-outlined text-secondary text-[16px]">{cat.icon}</span>
-                      <span className="font-mono text-[10px] text-secondary uppercase tracking-wider">{cat.category}</span>
+                  <div key={cat.category} className="bg-surface-elevated/20 border border-glass-border rounded-lg p-3">
+                    <div className="flex items-center gap-1.5 mb-2">
+                      <span className="material-symbols-outlined text-secondary text-[14px]">{cat.icon}</span>
+                      <span className="font-mono text-[9px] text-secondary uppercase tracking-wider">{cat.category}</span>
                     </div>
-                    <ul className="space-y-1.5">
+                    <ul className="space-y-1">
                       {cat.items.map((item) => (
-                        <li key={item} className="font-mono text-[11px] text-text-primary">
+                        <li key={item} className="font-mono text-[10px] text-text-primary">
                           {item}
                         </li>
                       ))}
@@ -325,15 +325,15 @@ export function Projects() {
 
             {/* ⑧ Gallery */}
             <div>
-              <h4 className="font-mono text-[11px] text-primary uppercase tracking-widest mb-5">
+              <h4 className="font-mono text-[10px] text-primary uppercase tracking-widest mb-3">
                 Gallery
               </h4>
-              <div className="flex gap-4 overflow-x-auto pb-3 scrollbar-hide">
+              <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
                 {tekcitym.gallery.map((img) => (
                   <GallerySlot key={img.label} src={img.src} label={img.label} />
                 ))}
               </div>
-              <p className="font-mono text-[10px] text-text-secondary/30 mt-3">
+              <p className="font-mono text-[9px] text-text-secondary/30 mt-2">
                 Drop screenshots into /public/images/projects/ to populate gallery.
               </p>
             </div>

@@ -15,6 +15,11 @@ export interface Achievement {
   organization: string;
   date: string;
   team?: string;
+  description?: string;
+  learned?: string[];
+  image?: string;
+  certificate?: string;
+  link?: string;
 }
 
 export const achievements: Achievement[] = [

@@ -1,11 +1,12 @@
 import { Suspense, lazy } from 'react';
 import { siteConfig } from '@/config/site';
+import { IDEPlayground } from '@/components/ui/IDEPlayground';
 
 const SystemNetwork = lazy(() => import('@/components/three/SystemNetwork'));
 
 export function Hero() {
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden py-24">
 
       {/* ── Ambient network — full viewport background ── */}
       <div className="absolute inset-0 z-0 pointer-events-none" aria-hidden="true">
@@ -18,55 +19,60 @@ export function Hero() {
           className="absolute inset-0"
           style={{
             background:
-              'radial-gradient(ellipse 38% 40% at 50% 50%, transparent 0%, transparent 40%, rgba(19,19,19,0.55) 65%, rgba(19,19,19,0.85) 100%)',
-          }}
-        />
-
-        {/* Subtle blur layer only at the very edges to soften the network boundary */}
-        <div
-          className="absolute inset-0"
-          style={{
-            backdropFilter: 'blur(0.5px)',
-            WebkitBackdropFilter: 'blur(0.5px)',
-            maskImage:
-              'radial-gradient(ellipse 70% 70% at 50% 50%, transparent 30%, black 100%)',
-            WebkitMaskImage:
-              'radial-gradient(ellipse 70% 70% at 50% 50%, transparent 30%, black 100%)',
+              'radial-gradient(ellipse 60% 60% at 50% 50%, transparent 0%, rgba(19,19,19,0.6) 40%, rgba(19,19,19,0.95) 100%)',
           }}
         />
       </div>
 
-      {/* ── Typography — sits above the background ── */}
-      <div className="relative z-10 text-center px-5 md:px-6 w-full">
-        <h1 className="font-sans text-5xl md:text-[64px] leading-tight text-primary tracking-tighter mb-2 spring-text-glow font-bold mt-24 md:mt-36">
-          {siteConfig.name}
-        </h1>
-        <p className="font-sans text-2xl md:text-3xl leading-snug text-secondary mb-4 font-bold">
-          {siteConfig.title}
-        </p>
+      {/* ── Main Content ── */}
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-5 md:px-8">
+        <div className="grid lg:grid-cols-[42%_54%] gap-10 lg:gap-14 items-center justify-between">
+          
+          {/* Left: IDE Playground */}
+          <div className="flex justify-center lg:justify-start w-full relative z-20">
+            <IDEPlayground />
+          </div>
 
-        <div className="flex items-center justify-center gap-2 text-text-secondary font-mono text-sm mt-8">
-          <span className="material-symbols-outlined text-[18px]">location_on</span>
-          <span>{siteConfig.location || 'Ho Chi Minh City, Vietnam'}</span>
-        </div>
+          {/* Right: Text Content (Primary Focal Point) */}
+          <div className="flex flex-col space-y-5">
+            <div className="space-y-1.5">
+              <h1 className="font-sans text-4xl md:text-5xl lg:text-[52px] leading-tight text-primary tracking-tight spring-text-glow font-bold">
+                {siteConfig.name}
+              </h1>
+              <h2 className="font-mono text-sm md:text-base text-secondary uppercase tracking-widest font-semibold flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+                {siteConfig.title}
+              </h2>
+            </div>
 
-        <div className="mt-12">
-          <button
-            className="animate-bounce inline-block cursor-pointer bg-transparent border-none p-0"
-            aria-label="Scroll to next section"
-            onClick={() => {
-              const target = document.getElementById('about');
-              if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }}
-          >
-            <span className="material-symbols-outlined text-primary text-4xl">keyboard_double_arrow_down</span>
-          </button>
+            <div className="space-y-3.5 text-text-secondary font-body text-base leading-relaxed max-w-[560px]">
+              <p>
+                I'm a <span className="text-text-primary font-medium">Software Engineering student</span> and currently a <span className="text-text-primary font-medium">Software Engineer Intern at FPT Software</span>, working on complex enterprise software for a Japanese client.
+              </p>
+              <p>
+                I specialize in <span className="text-text-primary font-medium">backend engineering</span> and distributed systems. Beyond work, I compete in <span className="text-text-primary font-medium">ICPC</span>, lead community engineering initiatives, and am actively building <span className="text-text-primary font-medium">TekcitYm</span>—a scalable high-concurrency reservation platform.
+              </p>
+            </div>
+
+            <div className="pt-2">
+              <a 
+                href="/resume.pdf" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-2.5 border border-primary/80 text-primary hover:bg-primary/10 transition-colors rounded font-mono text-xs tracking-wider uppercase font-bold glass-card hover:shadow-[0_0_15px_rgba(109,179,63,0.25)]"
+              >
+                <span className="material-symbols-outlined text-[16px]">terminal</span>
+                Initialize Resume
+              </a>
+            </div>
+          </div>
+
         </div>
       </div>
 
       {/* Ambient corner glows for extra depth */}
-      <div className="absolute top-1/4 left-1/6 w-80 h-80 bg-primary/4 rounded-full blur-[140px] pointer-events-none z-0" />
-      <div className="absolute bottom-1/4 right-1/6 w-80 h-80 bg-secondary/4 rounded-full blur-[140px] pointer-events-none z-0" />
+      <div className="absolute top-1/4 left-1/6 w-80 h-80 bg-primary/5 rounded-full blur-[140px] pointer-events-none z-0" />
+      <div className="absolute bottom-1/4 right-1/6 w-80 h-80 bg-secondary/5 rounded-full blur-[140px] pointer-events-none z-0" />
     </section>
   );
 }

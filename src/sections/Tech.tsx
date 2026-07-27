@@ -34,13 +34,13 @@ const categories = [
 
 export function Tech() {
   return (
-    <AnimatedSection id="tech" className="py-16 px-5 md:px-8 max-w-[1300px] mx-auto">
+    <AnimatedSection id="tech" className="py-14 px-5 md:px-8 max-w-5xl mx-auto">
 
       {/* Header */}
-      <h2 className="font-sans text-3xl leading-tight text-primary mb-2 font-bold">
+      <h2 className="font-sans text-2xl md:text-3xl leading-tight text-primary mb-1.5 font-bold">
         Technology Ecosystem
       </h2>
-      <p className="text-text-secondary font-body text-sm mb-10 max-w-xl">
+      <p className="text-text-secondary font-body text-sm mb-8 max-w-xl">
         Technologies I work with — presented as an engineering ecosystem, not a ranked skills list.
       </p>
 

@@ -56,7 +56,7 @@ const achievements: AchievementItem[] = [
     learned:
       'At this level there is no safety net for slow thinking. I learned to rapidly triage an unseen problem set, commit to a solution approach within minutes, and stay composed when an implementation fails at the last sample. The discipline of writing correct code fast — not just thinking correctly — became the main bottleneck to address.',
     images: [
-      { src: '/images/achievements/icpc-asia-hcmc-2025-certificate.jpg', caption: 'Certificate – ICPC Asia HCMC Regional 2025' },
+      { src: '/images/achievements/icpc-asia-hcmc-2025-certificate.png', caption: 'Certificate – ICPC Asia HCMC Regional 2025' },
       { src: '/images/achievements/icpc-asia-hcmc-2025-photo.jpg',       caption: 'Contest Photo – ICPC Asia HCMC Regional 2025' },
     ],
   },
@@ -135,7 +135,7 @@ const achievements: AchievementItem[] = [
     category: 'Academic',
     title: 'FPT University Scholarship',
     org: 'FPT University',
-    date: '2021 – Present',
+    date: 'Sept 2024 – Oct 2027',
     summary:
       'Awarded a merit-based scholarship at FPT University in recognition of academic performance.',
     description:
@@ -214,7 +214,7 @@ function AchievementCard({ item }: { item: AchievementItem }) {
       }`}
     >
       {/* ── Header — always visible ── */}
-      <div className="p-5 flex items-start gap-4">
+      <div className="p-4 flex items-start gap-3.5">
         {/* Icon */}
         <div className={`w-9 h-9 rounded-lg flex items-center justify-center shrink-0 border ${iconColourCls}`}>
           <span className={`material-symbols-outlined text-[18px]`}>{item.icon}</span>
@@ -340,18 +340,18 @@ export function Achievements() {
   const orderedCategories = CATEGORY_ORDER.filter(c => byCategory[c]);
 
   return (
-    <AnimatedSection id="achievements" className="py-16 px-5 md:px-8 max-w-[1300px] mx-auto">
-      <h2 className="font-sans text-3xl leading-tight text-primary mb-2 font-bold">Achievements</h2>
-      <p className="text-text-secondary font-body text-sm mb-10 max-w-xl">
+    <AnimatedSection id="achievements" className="py-14 px-5 md:px-8 max-w-5xl mx-auto">
+      <h2 className="font-sans text-2xl md:text-3xl leading-tight text-primary mb-1.5 font-bold">Achievements</h2>
+      <p className="text-text-secondary font-body text-sm mb-8 max-w-xl">
         Competitive programming results, hackathon placements, and academic recognitions — each
         entry reflects a concrete outcome and what I took away from the experience.
       </p>
 
-      <div className="space-y-8">
+      <div className="space-y-7">
         {orderedCategories.map((category) => (
           <div key={category}>
-            <h3 className="font-mono text-[11px] text-secondary uppercase tracking-widest mb-4 flex items-center gap-2">
-              <span className="w-4 h-px bg-secondary/40" />
+            <h3 className="font-mono text-[10px] text-secondary uppercase tracking-widest mb-3 flex items-center gap-2">
+              <span className="w-3.5 h-px bg-secondary/40" />
               {category}
             </h3>
             {/* Two fully independent flex columns — expanding one card never affects the other column */}

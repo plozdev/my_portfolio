@@ -100,9 +100,9 @@ function ImageSlot({ src, caption, className = '' }: EventImg & { className?: st
 
 export function Community() {
   return (
-    <AnimatedSection id="community" className="py-16 bg-background-deep">
-      <div className="max-w-[1300px] mx-auto px-5 md:px-8">
-        <h2 className="font-sans text-3xl leading-tight text-primary font-bold mb-2">Community</h2>
+    <AnimatedSection id="community" className="py-14 bg-background-deep">
+      <div className="max-w-5xl mx-auto px-5 md:px-8">
+        <h2 className="font-sans text-2xl md:text-3xl leading-tight text-primary font-bold mb-1.5">Community</h2>
         <p className="text-text-secondary font-body text-sm mb-8 max-w-xl">
           Outside of building software, I contribute through student tech communities and competitive programming.
         </p>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { socials } from '@/data/socials';
+
 
 const NAV_LINKS = [
   { href: '#home',        label: 'Home' },
@@ -49,8 +49,6 @@ export function Navbar() {
     return () => observers.forEach(o => o.disconnect());
   }, []);
 
-  const githubHref = socials.find(s => s.platform === 'GitHub')?.href ?? '#';
-  const linkedinHref = socials.find(s => s.platform === 'LinkedIn')?.href ?? '#';
 
   function handleNavClick(e: React.MouseEvent<HTMLAnchorElement>, href: string) {
     e.preventDefault();
@@ -69,7 +67,7 @@ export function Navbar() {
           : 'bg-surface/80'
         } backdrop-blur-xl`}
     >
-      <div className="flex items-center h-14 px-5 md:px-8 max-w-[1400px] mx-auto gap-6">
+      <div className="flex items-center h-13 px-5 md:px-8 max-w-6xl mx-auto gap-6">
 
         {/* Nav links — centered, scrollable on small screens */}
         <div className="flex-1 flex items-center justify-center overflow-x-auto scrollbar-hide">

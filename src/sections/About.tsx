@@ -10,12 +10,12 @@ const currentFocus = [
 
 export function About() {
   return (
-    <AnimatedSection id="about" className="py-16 px-5 md:px-8 max-w-[1300px] mx-auto">
-      <div className="grid md:grid-cols-2 gap-10 items-start">
+    <AnimatedSection id="about" className="py-14 px-5 md:px-8 max-w-5xl mx-auto">
+      <div className="grid md:grid-cols-2 gap-8 lg:gap-10 items-start">
 
         {/* Left: personal narrative */}
         <div>
-          <h2 className="font-sans text-3xl leading-tight text-primary mb-4 font-bold">
+          <h2 className="font-sans text-2xl md:text-3xl leading-tight text-primary mb-4 font-bold">
             About Me
           </h2>
           <div className="space-y-4 text-text-secondary font-body text-base leading-relaxed">
