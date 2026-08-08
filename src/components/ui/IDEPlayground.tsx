@@ -1,233 +1,265 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
-interface PlaygroundFile {
-  language: string;
-  filename: string;
-  code: string;
-  status: string;
+interface InfoItem {
+  label: string;
+  value: string;
+  highlight?: boolean;
+  isStatus?: boolean;
 }
 
-const PLAYGROUND_FILES: PlaygroundFile[] = [
-  {
-    language: 'Java',
-    filename: 'Main.java',
-    status: 'Java 21',
-    code: `public class Main {
-    public static void main(String[] args) {
-        System.out.println("Hello, World!");
-    }
-}`
-  },
-  {
-    language: 'C++',
-    filename: 'main.cpp',
-    status: 'C++20',
-    code: `#include <iostream>
+interface TextLine {
+  text: string;
+  highlight?: boolean;
+  primary?: boolean;
+}
 
-int main() {
-    std::cout << "Hello, World!" << std::endl;
-    return 0;
-}`
-  },
-  {
-    language: 'C',
-    filename: 'main.c',
-    status: 'C17',
-    code: `#include <stdio.h>
+interface CommandItem {
+  command: string;
+  type: 'key-value' | 'lines';
+  items?: InfoItem[];
+  lines?: TextLine[];
+}
 
-int main() {
-    printf("Hello, World!\\n");
-    return 0;
-}`
+const PROFILE_COMMANDS: CommandItem[] = [
+  {
+    command: 'whoami',
+    type: 'key-value',
+    items: [
+      { label: 'name', value: 'Anh Hoang Mai' },
+      { label: 'role', value: 'Backend Developer', highlight: true },
+      { label: 'born', value: '01 Jul 2006' },
+      { label: 'location', value: 'Ho Chi Minh City, Vietnam' },
+    ],
   },
   {
-    language: 'Go',
-    filename: 'main.go',
-    status: 'Go 1.24',
-    code: `package main
-
-import "fmt"
-
-func main() {
-    fmt.Println("Hello, World!")
-}`
+    command: 'stack',
+    type: 'lines',
+    lines: [
+      { text: 'Java · Spring Boot · React · TypeScript ', primary: true },
+      { text: 'C++ · C# · Python · Kotlin · Android' },
+      { text: 'PostgreSQL · Oracle · MSSQL · Redis · Apache Kafka' },
+      { text: 'Git · GitHub · Docker · Google Cloud · Firebase' },
+    ],
   },
   {
-    language: 'Python',
-    filename: 'main.py',
-    status: 'Python 3.13',
-    code: `def main():
-    print("Hello, World!")
-
-if __name__ == "__main__":
-    main()`
+    command: 'current',
+    type: 'key-value',
+    items: [
+      { label: 'work', value: 'FPT Software' },
+      { label: 'position', value: 'Software Engineer Intern' },
+      { label: 'school', value: 'FPT University' },
+      { label: 'degree', value: 'Software Engineering (GPA 8.3/10)' },
+      { label: 'status', value: 'online', isStatus: true },
+    ],
   },
   {
-    language: 'Kotlin',
-    filename: 'Main.kt',
-    status: 'Kotlin 2.0',
-    code: `fun main() {
-    println("Hello, World!")
-}`
+    command: 'focus',
+    type: 'lines',
+    lines: [
+      { text: 'backend engineering', highlight: true },
+      { text: 'distributed systems' },
+      { text: 'system design & high-concurrency' },
+    ],
   },
   {
-    language: 'Dart',
-    filename: 'main.dart',
-    status: 'Dart 3.3',
-    code: `void main() {
-    print('Hello, World!');
-}`
+    command: 'community',
+    type: 'key-value',
+    items: [
+      { label: 'lead', value: 'GDGoC FPTU HCMC' },
+      { label: 'academics', value: 'ICPC Competitor' },
+    ],
   },
-  {
-    language: 'C#',
-    filename: 'Program.cs',
-    status: '.NET 9',
-    code: `using System;
-
-namespace HelloWorld {
-    class Program {
-        static void Main(string[] args) {
-            Console.WriteLine("Hello, World!");
-        }
-    }
-}`
-  }
 ];
 
-function highlight(code: string) {
-  return code
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/("(?:\\"|[^"])*"|'(?:\\'|[^'])*')/g, '<span style="color: #ce9178">$1</span>')
-    .replace(/\b(public|class|static|void|int|return|package|import|func|def|if|fun|var|namespace|using)\b/g, '<span style="color: #569cd6">$1</span>')
-    .replace(/\b(String|string|System|Console|fmt|std|cout|endl|printf|println|Println|WriteLine|print|__name__|__main__)\b/g, '<span style="color: #4ec9b0">$1</span>')
-    .replace(/\b(main)\b/g, '<span style="color: #dcdcaa">$1</span>')
-    .replace(/(\b\d+\b)/g, '<span style="color: #b5cea8">$1</span>')
-    .replace(/(#include)/g, '<span style="color: #c586c0">$1</span>')
-    .replace(/(&lt;.*?&gt;)/g, '<span style="color: #ce9178">$1</span>')
-    .replace(/(\/\/.*$)/gm, '<span style="color: #6a9955">$1</span>'); 
-}
+export function ProfileTerminal() {
+  const [stepIndex, setStepIndex] = useState(0);
+  const [typedCharCount, setTypedCharCount] = useState(0);
+  const [isTypingCommand, setIsTypingCommand] = useState(true);
+  const [isFinished, setIsFinished] = useState(false);
+  const terminalBodyRef = useRef<HTMLDivElement>(null);
 
-export function IDEPlayground() {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [cursorLine, setCursorLine] = useState(0);
-
+  // Check reduced motion preference
   useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % PLAYGROUND_FILES.length);
-    }, 5000);
-    return () => clearInterval(interval);
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      setStepIndex(PROFILE_COMMANDS.length);
+      setIsFinished(true);
+      return;
+    }
   }, []);
 
+  // Typing animation driver
   useEffect(() => {
-    const codeLines = PLAYGROUND_FILES[activeIndex].code.split('\n');
-    setCursorLine(codeLines.length > 2 ? 2 : 0);
-    
-    const interval = setInterval(() => {
-      setCursorLine(prev => {
-        let next = prev + 1;
-        if (next >= codeLines.length) next = 0;
-        return next;
-      });
-    }, 2500);
-    
-    return () => clearInterval(interval);
-  }, [activeIndex]);
+    if (isFinished) return;
 
-  const activeFile = PLAYGROUND_FILES[activeIndex];
-  const activeCodeLines = activeFile.code.split('\n');
-  const activeCol = (activeCodeLines[cursorLine] || '').length + 1;
+    if (stepIndex >= PROFILE_COMMANDS.length) {
+      setIsFinished(true);
+      return;
+    }
+
+    const currentCmd = PROFILE_COMMANDS[stepIndex].command;
+
+    if (isTypingCommand) {
+      if (typedCharCount < currentCmd.length) {
+        // Randomize character delay slightly for realistic feel (45-80ms)
+        const delay = 45 + Math.random() * 35;
+        const timer = setTimeout(() => {
+          setTypedCharCount(prev => prev + 1);
+        }, delay);
+        return () => clearTimeout(timer);
+      } else {
+        // Command typing finished, short pause before showing output
+        const timer = setTimeout(() => {
+          setIsTypingCommand(false);
+        }, 220);
+        return () => clearTimeout(timer);
+      }
+    } else {
+      // Pause after output before typing next command (450ms)
+      const timer = setTimeout(() => {
+        setStepIndex(prev => prev + 1);
+        setTypedCharCount(0);
+        setIsTypingCommand(true);
+      }, 450);
+      return () => clearTimeout(timer);
+    }
+  }, [stepIndex, typedCharCount, isTypingCommand, isFinished]);
+
+  // Auto-scroll terminal body to bottom as text appears
+  useEffect(() => {
+    if (terminalBodyRef.current) {
+      terminalBodyRef.current.scrollTop = terminalBodyRef.current.scrollHeight;
+    }
+  }, [stepIndex, typedCharCount, isTypingCommand]);
 
   return (
-    /* 
-      =================================================================
-      [CHỖ ĐIỀU CHỈNH KÍCH THƯỚC KHUNG NGOÀI (WIDTH)]
-      Chỉnh độ rộng khung IDE (hiện tại max-w-[480px] chuẩn phong cách Apple/Linear gọn gàng)
-      =================================================================
-    */
-    <div className="w-full max-w-[480px] mx-auto rounded-lg overflow-hidden border border-glass-border glass-card shadow-xl flex flex-col bg-[#0d1117] transition-all">
-      {/* Header / Title Bar */}
-      <div className="flex items-center px-3.5 py-2 bg-[#161b22] border-b border-glass-border relative">
+    <div className="w-full max-w-[500px] mx-auto rounded-xl overflow-hidden border border-[#6DB33F]/30 glass-card shadow-[0_0_35px_rgba(109,179,63,0.12)] flex flex-col bg-[#0d1117]/95 backdrop-blur-md transition-all">
+      {/* Header / Chrome */}
+      <div className="flex items-center px-4 py-2.5 bg-[#161b22] border-b border-white/10 relative">
         {/* macOS Traffic Lights */}
-        <div className="flex gap-1.5 absolute left-3.5">
-          <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]" />
-          <div className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
-          <div className="w-2.5 h-2.5 rounded-full bg-[#27c93f]" />
+        <div className="flex gap-2 absolute left-4">
+          <div className="w-3 h-3 rounded-full bg-[#ff5f56]" />
+          <div className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
+          <div className="w-3 h-3 rounded-full bg-[#27c93f]" />
         </div>
-        
-        {/* Title */}
-        <div className="flex-1 flex justify-center text-[11px] text-text-secondary font-sans font-medium select-none">
-          {activeFile.filename} — IDE
+
+        {/* Window Title */}
+        <div className="flex-1 flex justify-center text-xs text-text-secondary font-mono select-none">
+          hoang@dev:~
         </div>
       </div>
-      
-      {/* Editor Tabs */}
-      <div className="flex overflow-x-auto scrollbar-hide bg-[#161b22] border-b border-glass-border">
-        {PLAYGROUND_FILES.map((file, idx) => (
-          <div
-            key={file.filename}
-            className={`px-3 py-1.5 flex items-center gap-1.5 text-[11px] font-mono cursor-pointer border-b transition-all shrink-0 ${
-              activeIndex === idx
-                ? 'border-primary text-primary bg-[#0d1117]'
-                : 'border-transparent text-text-secondary hover:bg-white/5'
-            }`}
-            onClick={() => setActiveIndex(idx)}
-          >
-            <span>{file.filename}</span>
-          </div>
-        ))}
-      </div>
-      
-      {/* 
-        =================================================================
-        [CHỖ ĐIỀU CHỈNH CHIỀU CAO & CỠ CHỮ KHUNG SOẠN THẢO (HEIGHT & FONT)]
-        - `h-[210px]`: Chiều cao khung code nhỏ gọn, không phình to.
-        - `text-[13px]`: Cỡ chữ chuẩn VSCode (~13px).
-        - `leading-5.5`: Khoảng cách dòng vừa vặn, chuẩn xác.
-        =================================================================
-      */}
-      <div className="relative h-[210px] overflow-hidden bg-[#0d1117] text-[13px] font-mono leading-[22px]">
-        {PLAYGROUND_FILES.map((file, fileIdx) => {
-          const lines = file.code.split('\n');
+
+      {/* Terminal Content Body */}
+      <div
+        ref={terminalBodyRef}
+        className="h-[340px] p-4 sm:p-5 overflow-y-auto scrollbar-hide font-mono text-xs sm:text-[13px] leading-[22px] text-[#c9d1d9] bg-[#0d1117] space-y-4"
+      >
+        {PROFILE_COMMANDS.map((cmdItem, idx) => {
+          const isCurrentStep = idx === stepIndex;
+          const isPastStep = idx < stepIndex;
+
+          if (!isPastStep && !isCurrentStep && !isFinished) return null;
+
+          const typedText = isPastStep || isFinished
+            ? cmdItem.command
+            : cmdItem.command.slice(0, typedCharCount);
+
+          const showOutput = isPastStep || isFinished || (!isTypingCommand && isCurrentStep);
+
           return (
-            <div
-              key={file.filename}
-              className={`absolute inset-0 p-3 transition-opacity duration-500 ${
-                activeIndex === fileIdx ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
-              }`}
-            >
-              {lines.map((line, lineIdx) => {
-                const isCursorLine = lineIdx === cursorLine;
-                return (
-                  <div key={lineIdx} className="flex group hover:bg-white/5 transition-colors rounded px-1">
-                    <div className="w-6 flex-shrink-0 text-right pr-3 text-[11px] text-text-secondary/40 select-none">
-                      {lineIdx + 1}
+            <div key={cmdItem.command} className="space-y-1.5">
+              {/* Prompt & Command */}
+              <div className="flex items-center gap-2 text-white">
+                <span className="text-[#6DB33F] font-bold">$</span>
+                <span className="font-semibold">{typedText}</span>
+                {isCurrentStep && isTypingCommand && !isFinished && (
+                  <span className="inline-block w-2 h-4 bg-[#6DB33F] animate-pulse" />
+                )}
+              </div>
+
+              {/* Command Output */}
+              {showOutput && (
+                <div className="pl-3.5 border-l-2 border-[#6DB33F]/30 space-y-1.5 my-1 text-text-secondary">
+                  {cmdItem.type === 'key-value' && cmdItem.items && (
+                    <div className="space-y-1">
+                      {cmdItem.items.map(item => (
+                        <div key={item.label} className="flex gap-2">
+                          <span className="w-20 shrink-0 text-text-secondary/60 font-mono">
+                            {item.label}
+                          </span>
+                          <span className="text-text-secondary/40">:</span>
+                          <span
+                            className={
+                              item.highlight
+                                ? 'text-[#6DB33F] font-bold'
+                                : item.isStatus
+                                ? 'text-[#6DB33F] font-medium flex items-center gap-1.5'
+                                : 'text-white/90 font-medium'
+                            }
+                          >
+                            {item.isStatus && (
+                              <span className="w-1.5 h-1.5 rounded-full bg-[#6DB33F] animate-pulse" />
+                            )}
+                            {item.value}
+                          </span>
+                        </div>
+                      ))}
                     </div>
-                    <div className="flex-1 whitespace-pre text-[#c9d1d9]">
-                      <span dangerouslySetInnerHTML={{ __html: highlight(line) }} />
-                      {activeIndex === fileIdx && isCursorLine && (
-                        <span className="inline-block w-1.5 h-[14px] bg-primary animate-pulse ml-0.5 align-middle" />
-                      )}
+                  )}
+
+                  {cmdItem.type === 'lines' && cmdItem.lines && (
+                    <div className="space-y-0.5">
+                      {cmdItem.lines.map((line, lIdx) => (
+                        <div
+                          key={lIdx}
+                          className={
+                            line.highlight
+                              ? 'text-[#6DB33F] font-bold'
+                              : line.primary
+                              ? 'text-white font-medium'
+                              : 'text-text-secondary'
+                          }
+                        >
+                          {line.primary ? (
+                            <span>
+                              <span className="text-[#6DB33F] font-bold">Java</span> ·{' '}
+                              <span className="text-[#6DB33F] font-bold">Spring Boot</span> · React · TypeScript
+                            </span>
+                          ) : (
+                            line.text
+                          )}
+                        </div>
+                      ))}
                     </div>
-                  </div>
-                );
-              })}
+                  )}
+                </div>
+              )}
             </div>
           );
         })}
+
+        {/* Final blinking active prompt when sequence finishes */}
+        {(isFinished || stepIndex >= PROFILE_COMMANDS.length) && (
+          <div className="flex items-center gap-2 text-white pt-1">
+            <span className="text-[#6DB33F] font-bold">$</span>
+            <span className="inline-block w-2 h-4 bg-[#6DB33F] animate-pulse" />
+          </div>
+        )}
       </div>
-      
-      {/* Status Bar */}
-      <div className="flex items-center justify-between px-3.5 py-1 bg-[#161b22] border-t border-glass-border text-[10px] text-text-secondary font-mono uppercase tracking-wider select-none">
+
+      {/* Bottom Status Bar */}
+      <div className="flex items-center justify-between px-4 py-1.5 bg-[#161b22] border-t border-white/10 text-[10px] text-text-secondary font-mono uppercase tracking-wider select-none">
         <div className="flex items-center gap-3">
-          <span className="text-primary font-medium">{activeFile.status}</span>
+          <span className="text-[#6DB33F] font-semibold">LINUX</span>
           <span>UTF-8</span>
         </div>
-        <div className="flex items-center gap-3">
-          <span>Ln {cursorLine + 1}, Col {activeCol}</span>
-          <span>Spaces: 4</span>
+        <div className="flex items-center gap-1.5">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#6DB33F] animate-pulse" />
+          <span className="text-[#6DB33F] font-semibold">ONLINE</span>
         </div>
       </div>
     </div>
   );
 }
+
+export { ProfileTerminal as IDEPlayground };
