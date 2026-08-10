@@ -48,7 +48,7 @@ const PROFILE_COMMANDS: CommandItem[] = [
       { label: 'work', value: 'FPT Software' },
       { label: 'position', value: 'Software Engineer Intern' },
       { label: 'school', value: 'FPT University' },
-      { label: 'degree', value: 'Software Engineering (GPA 8.3/10)' },
+      { label: 'degree', value: 'Software Engineering (GPA 8.2/10)' },
       { label: 'status', value: 'online', isStatus: true },
     ],
   },

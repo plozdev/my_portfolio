@@ -36,7 +36,10 @@ export function Hero() {
             
             {/* Header Title */}
             <div>
-              <h1 className="font-sans text-5xl sm:text-6xl lg:text-[70px] font-black leading-[1.05] tracking-tight uppercase">
+              <p className="font-mono text-sm sm:text-base text-text-secondary font-medium mb-1.5">
+                Hi, I am
+              </p>
+              <h1 className="font-sans text-5xl sm:text-6xl lg:text-[76px] font-black leading-[1.03] tracking-tight uppercase">
                 <span className="text-[#6DB33F] block">ANH</span>
                 <span className="text-white block">HOANG MAI</span>
               </h1>
@@ -46,7 +49,7 @@ export function Hero() {
             </div>
 
             {/* Subtitle / Pitch */}
-            <p className="text-text-secondary font-body text-base sm:text-lg leading-relaxed max-w-[580px]">
+            <p className="text-text-secondary font-body text-base sm:text-lg leading-relaxed max-w-[600px]">
               Building scalable, reliable, and high-performance backend systems that handle{' '}
               <span className="text-[#6DB33F] font-semibold">real-world scale.</span>
             </p>

@@ -15,7 +15,8 @@ export function About() {
 
         {/* Left: personal narrative */}
         <div>
-          <h2 className="font-sans text-2xl md:text-3xl leading-tight text-primary mb-4 font-bold">
+          <h2 className="font-sans text-3xl md:text-4xl leading-tight font-bold text-white flex items-center gap-2 mb-4">
+            <span className="text-primary font-mono select-none">&gt;_</span>
             About Me
           </h2>
           <div className="space-y-4 text-text-secondary font-body text-base leading-relaxed">

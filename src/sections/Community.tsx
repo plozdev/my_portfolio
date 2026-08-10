@@ -102,10 +102,15 @@ export function Community() {
   return (
     <AnimatedSection id="community" className="py-14 bg-background-deep">
       <div className="max-w-5xl mx-auto px-5 md:px-8">
-        <h2 className="font-sans text-2xl md:text-3xl leading-tight text-primary font-bold mb-1.5">Community</h2>
-        <p className="text-text-secondary font-body text-sm mb-8 max-w-xl">
-          Outside of building software, I contribute through student tech communities and competitive programming.
-        </p>
+        <div className="mb-10">
+          <h2 className="font-sans text-3xl md:text-4xl leading-tight font-bold text-white flex items-center gap-2">
+            <span className="text-primary font-mono select-none">&gt;_</span>
+            Community
+          </h2>
+          <p className="font-mono text-xs md:text-sm text-text-secondary/70 tracking-wide mt-1">
+            Tech communities &amp; competitive programming leadership
+          </p>
+        </div>
 
         <div className="space-y-8">
           {events.map((ev) => (

@@ -1,5 +1,4 @@
 import { SEO } from './components/SEO';
-import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
 import { Hero } from './sections/Hero';
 import { Experience } from './sections/Experience';
@@ -10,8 +9,7 @@ function App() {
   return (
     <>
       <SEO />
-      <Navbar />
-      <main className="pt-14">
+      <main>
         <Hero />
         <Experience />
         <Projects />
