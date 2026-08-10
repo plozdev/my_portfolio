@@ -18,9 +18,14 @@ const SkillIcon = ({ src, title }: { src: string; title?: string }) => {
     return <span className="text-[10px] font-mono font-black tracking-tight text-white select-none">{shortText}</span>;
   }
 
+  const base = import.meta.env.BASE_URL || '/';
+  const cleanBase = base.endsWith('/') ? base : `${base}/`;
+  const cleanUrl = src.startsWith('/') ? src.slice(1) : src;
+  const resolvedUrl = `${cleanBase}${cleanUrl}`;
+
   return (
     <img
-      src={src}
+      src={resolvedUrl}
       alt={title || "Skill"}
       className="w-full h-full object-contain"
       onError={() => setHasError(true)}
@@ -95,6 +100,11 @@ function ScrollingPreview({ src, alt }: { src: string; alt: string }) {
   const viewportRef = useRef<HTMLDivElement>(null);
   const [scrollPx, setScrollPx] = useState(0);
 
+  const base = import.meta.env.BASE_URL || '/';
+  const cleanBase = base.endsWith('/') ? base : `${base}/`;
+  const cleanUrl = src.startsWith('/') ? src.slice(1) : src;
+  const resolvedUrl = `${cleanBase}${cleanUrl}`;
+
   useEffect(() => {
     if (hasError) return;
     const img = new window.Image();
@@ -108,10 +118,10 @@ function ScrollingPreview({ src, alt }: { src: string; alt: string }) {
     };
     img.onload = compute;
     img.onerror = () => setHasError(true);
-    img.src = src;
+    img.src = resolvedUrl;
     window.addEventListener('resize', compute);
     return () => window.removeEventListener('resize', compute);
-  }, [src, hasError]);
+  }, [resolvedUrl, hasError]);
 
   const scrolls = scrollPx > 0;
   const duration = scrolls ? scrollPx / 60 : 0;
@@ -132,7 +142,7 @@ function ScrollingPreview({ src, alt }: { src: string; alt: string }) {
           <motion.div
             className="absolute inset-0 bg-no-repeat"
             style={{
-              backgroundImage: `url(${src})`,
+              backgroundImage: `url(${resolvedUrl})`,
               backgroundSize: scrolls ? '100% auto' : 'cover',
               backgroundPosition: scrolls ? '50% 0%' : 'center',
             }}
@@ -191,6 +201,11 @@ function SlideShow({ images }: { images: { src: string; label: string }[] }) {
   const currentImage = images[currentIndex];
   const isError = loadErrors[currentImage.src];
 
+  const base = import.meta.env.BASE_URL || '/';
+  const cleanBase = base.endsWith('/') ? base : `${base}/`;
+  const cleanUrl = currentImage.src.startsWith('/') ? currentImage.src.slice(1) : currentImage.src;
+  const resolvedUrl = `${cleanBase}${cleanUrl}`;
+
   return (
     <div className="space-y-2">
       <div className="relative aspect-video w-full rounded-xl border border-glass-border overflow-hidden bg-[#0d130d] group/slideshow">
@@ -202,7 +217,7 @@ function SlideShow({ images }: { images: { src: string; label: string }[] }) {
           </div>
         ) : (
           <img
-            src={currentImage.src}
+            src={resolvedUrl}
             alt={currentImage.label}
             className="w-full h-full object-contain cursor-zoom-in transition-transform duration-300 hover:scale-[1.01]"
             onClick={() => setLightboxOpen(true)}
@@ -268,7 +283,7 @@ function SlideShow({ images }: { images: { src: string; label: string }[] }) {
               onClick={(e) => e.stopPropagation()}
             >
               <img
-                src={currentImage.src}
+                src={resolvedUrl}
                 alt={currentImage.label}
                 className="max-w-full max-h-[85vh] object-contain rounded-lg border border-white/10 shadow-2xl"
               />

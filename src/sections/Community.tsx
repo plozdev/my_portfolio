@@ -77,10 +77,15 @@ const events: CommunityEvent[] = [
 ];
 
 function ImageSlot({ src, caption, className = '' }: EventImg & { className?: string }) {
+  const base = import.meta.env.BASE_URL || '/';
+  const cleanBase = base.endsWith('/') ? base : `${base}/`;
+  const cleanUrl = src.startsWith('/') ? src.slice(1) : src;
+  const resolvedUrl = `${cleanBase}${cleanUrl}`;
+
   return (
     <div className={`rounded-lg overflow-hidden border border-glass-border bg-surface-elevated/20 flex items-center justify-center ${className}`}>
       <img
-        src={src}
+        src={resolvedUrl}
         alt={caption}
         className="w-full h-full object-cover opacity-70 hover:opacity-95 transition-opacity duration-300"
         onError={(e) => {

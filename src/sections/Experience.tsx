@@ -20,9 +20,14 @@ function ExperienceLogo({ logoUrl, company, fallbackIcon }: { logoUrl?: string; 
     return <span className="material-symbols-outlined text-primary text-2xl sm:text-3xl">{fallbackIcon}</span>;
   }
 
+  const base = import.meta.env.BASE_URL || '/';
+  const cleanBase = base.endsWith('/') ? base : `${base}/`;
+  const cleanUrl = logoUrl.startsWith('/') ? logoUrl.slice(1) : logoUrl;
+  const resolvedUrl = `${cleanBase}${cleanUrl}`;
+
   return (
     <img
-      src={logoUrl}
+      src={resolvedUrl}
       alt={company}
       className="w-full h-full object-contain"
       onError={() => setHasError(true)}
