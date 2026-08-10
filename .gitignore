@@ -27,3 +27,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Exclude documentation md files, keep only README.md
+*.md
+!README.md
+
