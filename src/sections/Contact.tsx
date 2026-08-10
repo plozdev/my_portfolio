@@ -12,18 +12,55 @@ export function Contact() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setErrorMessage('');
 
     try {
-      // Prepared for Resend API key integration / form submission
-      await new Promise(resolve => setTimeout(resolve, 800));
+      const apiKey = import.meta.env.VITE_RESEND_API_KEY;
+      const fromEmail = import.meta.env.VITE_RESEND_FROM || 'onboarding@resend.dev';
+      const toEmail = import.meta.env.VITE_RESEND_TO || 'hoangmai.it.dev@gmail.com';
+
+      if (!apiKey) {
+        throw new Error('Vui lòng thêm VITE_RESEND_API_KEY vào tệp .env');
+      }
+
+      // Check if we are running in local dev or production
+      const isDev = import.meta.env.DEV;
+      const url = isDev ? '/api-resend/emails' : 'https://api.resend.com/emails';
+
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${apiKey}`,
+        },
+        body: JSON.stringify({
+          from: fromEmail,
+          to: toEmail,
+          subject: `Portfolio Message from ${formData.name}`,
+          html: `<div style="font-family: sans-serif; padding: 20px; border: 1px solid #eee; border-radius: 8px;">
+            <h3 style="color: #6DB33F;">New Message from Portfolio</h3>
+            <p><strong>Sender:</strong> ${formData.name} (<a href="mailto:${formData.email}">${formData.email}</a>)</p>
+            <p><strong>Message:</strong></p>
+            <div style="background: #f9f9f9; padding: 15px; border-radius: 4px; white-space: pre-wrap;">${formData.message}</div>
+          </div>`,
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData?.message || `API error with status ${response.status}`);
+      }
+
       setSubmitted(true);
       setFormData({ name: '', email: '', message: '' });
-    } catch {
-      // Error handling if needed
+    } catch (err: any) {
+      console.error('Error sending message:', err);
+      setErrorMessage(err.message || 'Có lỗi xảy ra khi gửi tin nhắn. Vui lòng thử lại sau.');
     } finally {
       setIsSubmitting(false);
     }
@@ -52,15 +89,14 @@ export function Contact() {
             </span>
           </div>
 
-          <h2 className="font-sans text-3xl sm:text-4xl leading-tight text-white font-bold mb-3">
-            Let's build something{' '}
-            <span className="text-[#6DB33F]">together.</span>
+          <h2 className="font-sans text-3xl md:text-4xl leading-tight font-bold text-white flex items-center justify-center sm:justify-start gap-2 mb-2">
+            <span className="text-primary font-mono select-none">&gt;_</span>
+            Contact
           </h2>
-          <p className="text-text-secondary font-body text-sm leading-relaxed max-w-lg">
-            I'm open to backend roles, system design discussions, and collaborative
-            projects. Whether you have a question or just want to say hello — feel free to reach out.
+          <p className="font-mono text-xs md:text-sm text-text-secondary/70 tracking-wide mt-1">
+            Let's build something together
           </p>
-          <p className="text-text-secondary text-xs sm:text-sm">
+          <p className="text-text-secondary text-xs sm:text-sm mt-4">
               Please contact me directly at{' '}
               <a
                 href={`mailto:${email}`}
@@ -148,6 +184,13 @@ export function Contact() {
               <p className="text-[11px] text-text-secondary/50 font-mono pt-1">
                 I'll never share your data with anyone else. Pinky promise!
               </p>
+
+              {/* Error Message */}
+              {errorMessage && (
+                <div className="p-3 rounded-lg bg-red-500/10 border border-red-500/30 text-red-500 font-mono text-[11px] leading-relaxed">
+                  {errorMessage}
+                </div>
+              )}
 
               {/* Submit Button */}
               <button
