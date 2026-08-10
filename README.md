@@ -1,67 +1,84 @@
-# Plozdev Developer Portfolio 🚀
+# Hi there, I'm Hoang Mai (plozdev) 👋
 
-A high-performance, developer-focused interactive portfolio website showcasing professional experience, software engineering projects, and system design skills. Built with modern web standards, terminal aesthetics, and smooth micro-animations.
+Welcome to my personal developer portfolio repository! I am a **Software Engineering Student** at **FPT University Ho Chi Minh City** with a deep passion for backend system design, database optimization, and modern frontend interfaces.
 
----
-
-## 🛠️ Tech Stack & Architecture
-
-- **Frontend**: [React 19](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/) + [Vite](https://vite.dev/) (extremely fast Hot Module Replacement)
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/) (modern responsive utility styling)
-- **3D Background Canvas**: [Three.js](https://threejs.org/) (Interactive node network nodes rendering on the Hero section)
-- **Animations**: [Framer Motion](https://www.framer.com/motion/) (smooth fade-ins, dialog scaling, and page transitions)
-- **Email Service Integration**: [Resend API](https://resend.com/) (securely routed via Vite reverse proxy server config)
-- **Code Linter**: [Oxlint](https://oxc.rs/) (high-performance JavaScript/TypeScript linter)
+✨ **[View My Live Portfolio](https://plozdev.id.vn)** *(Or replace with your actual live domain)*
 
 ---
 
-## ✨ Features
+## 🚀 About Me
 
-- **`>_` Terminal Style Section Headers**: Unified visual language across all sections.
-- **Interactive Hero**: Clean layout highlighting software engineering credentials alongside a 3D system network visualizer.
-- **Scannable Experience Timeline**: Concise descriptions, location metadata, and technology badges for education and internships.
-- **Refactored Projects Section**:
-  - **Scrolling Previews**: Vertical screenshots auto-scroll dynamically inside cards on hover.
-  - **SlideShow Detail Modal**: Seamless image slider with full-screen lightbox zoom mode.
-  - **Tech Skills Dock**: Flexbox-based tech emblems displaying full-color brand logos.
-- **Secure Contact Form**: Integrated with Resend API using local proxy rewrites to prevent browser CORS blockages and secure API key variables.
+- 🎓 **Education**: Software Engineering student at FPT University (GPA: **8.2/10**).
+- 🏆 **Competitive Programming**: Active participant in **ICPC Vietnam** rounds (Provincial, Southern, National).
+- 👥 **Community Leadership**: **Chapter Lead** at **GDGoC FPTU HCMC** (Google Developer Groups on Campus), hosting technical workshops and connecting student developers.
+- 💻 **Focus**: Designing high-concurrency architectures, distributed locking systems, and responsive user experiences.
 
 ---
 
-## 🚀 Getting Started
+## 🛠️ Tech Stack & Key Specialities
+
+<table>
+  <tr>
+    <td valign="top" width="50%">
+      <strong>Backend & Infrastructure</strong><br>
+      - ☕ Java 21, Spring Boot, Spring Security<br>
+      - ⚡ Redis, Redisson (Distributed Locks)<br>
+      - 🐳 Docker, Docker Compose<br>
+      - 🐘 PostgreSQL (Complex queries & indexes)
+    </td>
+    <td valign="top" width="50%">
+      <strong>Frontend & Scripting</strong><br>
+      - ⚛️ React 19, TypeScript, JavaScript<br>
+      - 💨 Tailwind CSS v4, Framer Motion<br>
+      - 🕸️ Three.js (interactive 3D background node networks)
+    </td>
+  </tr>
+</table>
+
+---
+
+## ⚡ Featured Project: TekcitYm
+A modular monolith backend system designed to handle high-concurrency seat reservations for massive flash-sale ticketing events.
+- **Problem solved**: Double-booking and overselling under heavy user concurrency.
+- **Tech Stack**: Java 21, Spring Boot, Redis, Redisson, PostgreSQL, Docker.
+- **Key Solutions**: Distributed locking, automated seat TTL expirations, and a cache-aside pattern to reduce database query strain.
+
+---
+
+## 📬 Connect With Me
+
+- 📧 **Email**: [hoangmai.it.dev@gmail.com](mailto:hoangmai.it.dev@gmail.com)
+- 💼 **LinkedIn**: [Hoang Mai](https://linkedin.com/in/plozdev) *(Or replace with your LinkedIn url)*
+- 🐙 **GitHub**: [github.com/plozdev](https://github.com/plozdev)
+
+---
+
+<details>
+<summary>🛠️ <strong>For Developers (Running the code locally)</strong></summary>
 
 ### 1. Prerequisites
-Ensure you have [Node.js](https://nodejs.org/) installed (v18+ recommended).
+- Node.js (v18+ recommended)
 
-### 2. Installation
-Clone the repository and install the dependencies:
+### 2. Installation & Setup
 ```bash
 npm install
 ```
 
-### 3. Environment Variables Setup
-Create a `.env` file in the root directory:
+### 3. Configuration (.env)
+Create a `.env` file at the root:
 ```env
-# Resend API Secret Key
 VITE_RESEND_API_KEY=re_your_api_key_here
-
-# Resend verified sender email address (e.g. onboarding@resend.dev during testing)
 VITE_RESEND_FROM=onboarding@resend.dev
-
-# The email address that will receive contact form submissions
-VITE_RESEND_TO=your_receiving_email@gmail.com
+VITE_RESEND_TO=hoangmai.it.dev@gmail.com
 ```
 
-### 4. Running Locally
-Start the development server:
+### 4. Running Dev Server
 ```bash
 npm run dev
 ```
-Open [http://localhost:5173](http://localhost:5173) in your browser to view the application.
 
 ### 5. Production Build
-Generate optimized production bundles:
 ```bash
 npm run build
 ```
-The build artifacts will be output to the `/dist` directory.
+</details>
