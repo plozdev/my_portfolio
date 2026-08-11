@@ -36,11 +36,13 @@ const SkillIcon = ({ src, title }: { src: string; title?: string }) => {
 interface SkillItem {
   title: string;
   icon: React.ReactNode;
+  bgClass?: string;
 }
 
-const makeBrand = (title: string, file: string): SkillItem => ({
+const makeBrand = (title: string, file: string, bgClass?: string): SkillItem => ({
   title,
   icon: <SkillIcon src={`/logos/${file}`} title={title} />,
+  bgClass,
 });
 
 const makeTextBrand = (title: string, text: string): SkillItem => ({
@@ -54,8 +56,10 @@ const SKILL_MAP: Record<string, SkillItem> = {
   'Tailwind CSS': makeBrand('Tailwind CSS', 'tailwind.svg'),
   'TypeScript': makeBrand('TypeScript', 'typescript.svg'),
   'JavaScript': makeBrand('JavaScript', 'javascript.svg'),
-  'Next.js': makeBrand('Next.js', 'nextjs.svg'),
+  'Next.js': makeBrand('Next.js', 'nextjs.svg', 'bg-white hover:bg-white/90 border border-white/80'),
   'Vue.js': makeBrand('Vue.js', 'vuejs.svg'),
+  'Vite': makeBrand('Vite', 'vite.svg'),
+  'Framer Motion': makeBrand('Framer Motion', 'framer-motion.svg'),
 
   // Backend / Database / DevOps
   'Spring Boot': makeBrand('Spring Boot', 'spring.svg'),
@@ -70,6 +74,8 @@ const SKILL_MAP: Record<string, SkillItem> = {
   'tRPC': makeBrand('tRPC', 'trpc.svg'),
   'Cloudflare': makeBrand('Cloudflare', 'cloudflare.svg'),
   'Python': makeBrand('Python', 'python.svg'),
+  'Git': makeBrand('Git', 'git.svg', 'bg-white hover:bg-white/90 border border-white/80'),
+  'GitHub': makeBrand('GitHub', 'git.svg', 'bg-white hover:bg-white/90 border border-white/80'),
 };
 
 const getSkillItem = (name: string): SkillItem => {
@@ -314,17 +320,17 @@ function FloatingDock({ items }: { items: SkillItem[] }) {
 function IconContainer({
   title,
   icon,
-}: {
-  title: string;
-  icon: React.ReactNode;
-}) {
+  bgClass,
+}: SkillItem) {
   const [hovered, setHovered] = useState(false);
 
   return (
     <div
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="w-10 h-10 rounded-full bg-[#141f14]/30 hover:bg-[#233823]/35 border border-[#233823]/80 flex items-center justify-center relative cursor-default shrink-0 transition-colors"
+      className={`w-10 h-10 rounded-full flex items-center justify-center relative cursor-default shrink-0 transition-colors ${
+        bgClass ? bgClass : 'bg-[#141f14]/30 hover:bg-[#233823]/35 border border-[#233823]/80'
+      }`}
     >
       <AnimatePresence>
         {hovered && (
@@ -587,6 +593,91 @@ const projectsData: ProjectData[] = [
             <p className="font-body text-xs text-text-secondary leading-relaxed">
               Designed as a Modular Monolith context. Bounded contexts are defined strictly, separating Event Management, Ticketing, and Notification modules cleanly. This keeps deployability simple and latency minimal, while ensuring the application can be seamlessly split into independent microservices if organizational scale demands it.
             </p>
+          </div>
+        </div>
+      );
+    }
+  },
+  {
+    id: 'portfolio',
+    category: 'Developer Tool & Brand',
+    title: 'Developer Portfolio',
+    status: 'Completed',
+    src: '/images/projects/portfolio-scroll.png',
+    screenshots: [
+      { src: '/images/projects/portfolio-scroll.png', label: 'Full Scroll Preview' }
+    ],
+    skills: {
+      frontend: ['React', 'Tailwind CSS', 'TypeScript', 'Vite', 'Framer Motion'],
+      backend: ['Git']
+    },
+    get content() {
+      return (
+        <div className="space-y-6">
+          {/* Overview */}
+          <div className="space-y-2">
+            <p className="font-mono text-lg text-primary font-bold">
+              Dark-themed developer brand &amp; interactive portfolio website.
+            </p>
+            <p className="font-body text-sm leading-relaxed text-text-secondary">
+              A premium, fast, and responsive portfolio designed to showcase software engineering skills, professional experiences, and systems architectures. Built with a modern terminal-inspired theme featuring custom animations, interactive project modals, and dynamic viewport calculations.
+            </p>
+          </div>
+
+          {/* Key Engineering Problems Solved */}
+          <div className="space-y-4">
+            <h5 className="font-mono text-[10px] uppercase tracking-widest text-[#6DB33F] font-bold">
+              Key Engineering Solutions
+            </h5>
+            <div className="grid sm:grid-cols-2 gap-4">
+              <div className="border border-[#233823] bg-[#141f14]/20 rounded-xl p-4 space-y-1.5">
+                <div className="flex items-center gap-2">
+                  <span className="material-symbols-outlined text-[#6DB33F] text-lg">motion_photos_on</span>
+                  <h6 className="font-sans font-bold text-sm text-white">Dynamic Scrolling Previews</h6>
+                </div>
+                <p className="font-body text-xs text-text-secondary leading-relaxed">
+                  Developed an aspect-ratio calculation utility that dynamically determines image height vs. viewport dimensions to trigger framer-motion scrolling of tall website screenshots.
+                </p>
+              </div>
+
+              <div className="border border-[#233823] bg-[#141f14]/20 rounded-xl p-4 space-y-1.5">
+                <div className="flex items-center gap-2">
+                  <span className="material-symbols-outlined text-[#6DB33F] text-lg">bolt</span>
+                  <h6 className="font-sans font-bold text-sm text-white">Optimized Asset Delivery</h6>
+                </div>
+                <p className="font-body text-xs text-text-secondary leading-relaxed">
+                  Leveraged Vite to bundle assets efficiently, compiling TypeScript and minifying CSS/JS into compact chunks with pre-rendered HTML components.
+                </p>
+              </div>
+
+              <div className="border border-[#233823] bg-[#141f14]/20 rounded-xl p-4 space-y-1.5">
+                <div className="flex items-center gap-2">
+                  <span className="material-symbols-outlined text-[#6DB33F] text-lg">palette</span>
+                  <h6 className="font-sans font-bold text-sm text-white">Cohesive Design System</h6>
+                </div>
+                <p className="font-body text-xs text-text-secondary leading-relaxed">
+                  Created a terminal-inspired dark theme using glassmorphic cards, custom typography from Google Fonts, and a customized Tailwind CSS color palette.
+                </p>
+              </div>
+
+              <div className="border border-[#233823] bg-[#141f14]/20 rounded-xl p-4 space-y-1.5">
+                <div className="flex items-center gap-2">
+                  <span className="material-symbols-outlined text-[#6DB33F] text-lg">devices</span>
+                  <h6 className="font-sans font-bold text-sm text-white">Responsive Layout</h6>
+                </div>
+                <p className="font-body text-xs text-text-secondary leading-relaxed">
+                  Crafted custom mobile layouts using Tailwind utility classes, adjusting sizing, paddings, and navigation flows for mobile-first user experiences.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Screenshot gallery */}
+          <div className="space-y-3">
+            <h5 className="font-mono text-[10px] uppercase tracking-widest text-[#6DB33F] font-bold">
+              Visual Tour &amp; Layout
+            </h5>
+            <SlideShow images={this.screenshots} />
           </div>
         </div>
       );
