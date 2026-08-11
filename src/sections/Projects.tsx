@@ -132,13 +132,50 @@ function ScrollingPreview({ src, alt }: { src: string; alt: string }) {
   const scrolls = scrollPx > 0;
   const duration = scrolls ? scrollPx / 60 : 0;
 
+
   return (
     <div className="absolute inset-0 bg-[#070b07] flex items-center justify-center overflow-hidden">
       {hasError ? (
-        <div className="flex flex-col items-center justify-center text-center p-6 space-y-1.5">
-          <span className="material-symbols-outlined text-3xl text-primary/30">terminal</span>
-          <p className="font-mono text-xs text-text-secondary/50 uppercase tracking-widest">{alt}</p>
-          <span className="font-mono text-[9px] text-text-secondary/30">Preview not available</span>
+        /* ── 3D Floating Terminal Code Preview Mockup (Replacing flat placeholder) ── */
+        <div className="w-full h-full p-3 flex flex-col justify-between bg-[#0d1117] border border-[#6DB33F]/30 rounded-xl relative overflow-hidden group-hover:border-[#6DB33F]/80 transition-colors shadow-[inner_0_0_20px_rgba(109,179,63,0.1)]">
+          {/* macOS Chrome Header */}
+          <div className="flex items-center justify-between pb-2 border-b border-white/10 select-none">
+            <div className="flex items-center gap-1.5">
+              <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]" />
+              <div className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
+              <div className="w-2.5 h-2.5 rounded-full bg-[#27c93f]" />
+            </div>
+            <span className="font-mono text-[10px] text-slate-400 font-semibold tracking-wide">
+              dev@{alt.toLowerCase().replace(/[^a-z0-9]/g, '')}:~
+            </span>
+            <div className="w-8" />
+          </div>
+
+          {/* Simulated Code Architecture Stream */}
+          <div className="font-mono text-[10px] sm:text-[11px] text-slate-300 leading-relaxed space-y-1 py-2 my-auto select-none">
+            <div className="text-[#6DB33F] font-bold flex items-center gap-1.5">
+              <span>&gt;</span>
+              <span>INITIALIZING SYSTEM ARCHITECTURE</span>
+            </div>
+            <div className="text-white/80 pl-3 border-l border-[#6DB33F]/30 space-y-0.5">
+              <p>• Spring Boot 3.2 + Redis + Kafka</p>
+              <p>• High-Concurrency Lock Management</p>
+              <p className="text-[#6DB33F] font-semibold">• Status: 200 OK [ACTIVE BUILD]</p>
+            </div>
+          </div>
+
+          {/* Tech Badges */}
+          <div className="flex items-center gap-2 pt-2 border-t border-white/10 select-none">
+            <span className="text-[9px] font-mono font-bold text-[#6DB33F] bg-[#6DB33F]/15 border border-[#6DB33F]/40 rounded px-2 py-0.5 uppercase tracking-wider">
+              {alt}
+            </span>
+            <span className="text-[9px] font-mono font-bold text-white/80 bg-white/5 border border-white/15 rounded px-2 py-0.5 uppercase tracking-wider">
+              ACTIVE BUILD
+            </span>
+          </div>
+
+          {/* Ambient Glow Spotlight */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-[#6DB33F]/10 rounded-full blur-2xl pointer-events-none" />
         </div>
       ) : (
         <div
@@ -351,28 +388,28 @@ function IconContainer({
   );
 }
 
-// ── ProjectCard Component ──
+// ── ProjectCard Component with 3D Tilt & Glassmorphism ──
 function ProjectCard({ project, onClick }: { project: ProjectData; onClick: () => void }) {
   return (
-    <div className="flex items-center justify-center">
+    <div className="flex items-center justify-center group/card">
       <button
         onClick={onClick}
-        className="group relative w-full max-w-[400px] aspect-[3/2] rounded-2xl overflow-hidden border border-glass-border bg-[#0a0f0a] hover:border-primary/40 transition-colors duration-300 outline-none text-left cursor-pointer shadow-md hover:shadow-lg"
+        className="group relative w-full max-w-[400px] aspect-[3/2] rounded-2xl overflow-hidden border border-[#6DB33F]/30 bg-[#0d1117]/90 hover:border-[#6DB33F] transition-all duration-500 ease-out outline-none text-left cursor-pointer shadow-[0_10px_30px_rgba(0,0,0,0.5),0_0_20px_rgba(109,179,63,0.1)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.8),0_0_40px_rgba(109,179,63,0.3)] backdrop-blur-md transform hover:-translate-y-1.5 lg:hover:[transform:perspective(1000px)_rotateY(-4deg)_rotateX(3deg)_translateY(-6px)]"
       >
         <ScrollingPreview src={project.src} alt={project.title} />
 
-        <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black via-black/80 to-transparent pointer-events-none z-10 flex flex-col justify-end p-4 pb-4">
+        <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#0d1117] via-[#0d1117]/85 to-transparent pointer-events-none z-10 flex flex-col justify-end p-4 pb-4">
           <div className="flex items-center gap-1.5 mb-1.5">
-            <span className="text-[9px] font-mono uppercase tracking-widest text-[#6DB33F] bg-[#141f14] border border-[#233823] rounded-full px-2 py-0.5 font-bold">
+            <span className="text-[9px] font-mono uppercase tracking-widest text-[#6DB33F] bg-[#6DB33F]/15 border border-[#6DB33F]/40 rounded-full px-2.5 py-0.5 font-bold shadow-sm">
               {project.category}
             </span>
-            <span className="text-[9px] font-mono uppercase tracking-widest text-secondary bg-secondary/10 border border-secondary/20 rounded-full px-2 py-0.5 font-bold">
+            <span className="text-[9px] font-mono uppercase tracking-widest text-slate-300 bg-white/5 border border-white/15 rounded-full px-2.5 py-0.5 font-bold">
               {project.status}
             </span>
           </div>
           <h4 className="font-sans text-base md:text-lg font-bold text-white tracking-tight flex items-center justify-between">
             {project.title}
-            <span className="material-symbols-outlined text-[15px] text-text-secondary/40 group-hover:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300">
+            <span className="material-symbols-outlined text-[16px] text-slate-400 group-hover:text-[#6DB33F] group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300">
               north_east
             </span>
           </h4>

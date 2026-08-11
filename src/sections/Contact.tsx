@@ -69,76 +69,78 @@ export function Contact() {
   return (
     <AnimatedSection
       id="contact"
-      className="py-20 bg-background-deep relative"
+      className="py-24 bg-background-deep relative overflow-hidden"
     >
-      {/* Subtle top border glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-px bg-gradient-to-r from-transparent via-[#6DB33F]/40 to-transparent" />
+      {/* Background Cyber Grid Mesh */}
+      <div className="absolute inset-0 bg-[radial-gradient(rgba(109,179,63,0.12)_1px,transparent_1px)] [background-size:32px_32px] opacity-30 pointer-events-none" />
 
-      <div className="max-w-2xl mx-auto px-5 md:px-8">
+      {/* Subtle top border glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-px bg-gradient-to-r from-transparent via-[#6DB33F]/50 to-transparent shadow-[0_0_15px_rgba(109,179,63,0.5)]" />
+
+      <div className="max-w-2xl mx-auto px-5 md:px-8 relative z-10">
 
         {/* ── Header ─────────────────────────────────────────── */}
-        <div className="mb-8 text-center sm:text-left">
+        <div className="mb-10 text-center sm:text-left">
           <div className="flex items-center justify-center sm:justify-start gap-2 mb-4">
             {/* Live availability indicator */}
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#6DB33F] opacity-60" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#6DB33F]" />
+            <span className="relative flex h-2.5 w-2.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#6DB33F] opacity-75" />
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#6DB33F]" />
             </span>
-            <span className="font-mono text-[11px] text-[#6DB33F] uppercase tracking-widest font-semibold">
+            <span className="font-mono text-xs text-[#6DB33F] uppercase tracking-widest font-semibold">
               Available to connect
             </span>
           </div>
 
           <h2 className="font-sans text-3xl md:text-4xl leading-tight font-bold text-white flex items-center justify-center sm:justify-start gap-2 mb-2">
-            <span className="text-primary font-mono select-none">&gt;_</span>
+            <span className="text-[#6DB33F] font-mono select-none">&gt;_</span>
             Contact
           </h2>
-          <p className="font-mono text-xs md:text-sm text-text-secondary/70 tracking-wide mt-1">
-            Let's build something together
+          <p className="font-mono text-xs md:text-sm text-slate-300 tracking-wide mt-1">
+            Let's build something scalable &amp; high-performance together.
           </p>
-          <p className="text-text-secondary text-xs sm:text-sm mt-4">
+          <p className="text-slate-300 text-xs sm:text-sm mt-4">
               Please contact me directly at{' '}
               <a
                 href={`mailto:${email}`}
-                className="text-[#6DB33F] hover:underline font-mono font-medium"
+                className="text-[#6DB33F] hover:underline font-mono font-bold"
               >
                 {email}
               </a>{' '}
-              or drop your info here.
+              or drop your message below.
             </p>
         </div>
 
-        {/* ── Contact Form Card ───────────────────────────────── */}
-        <div className="glass-card rounded-2xl p-6 sm:p-8 border border-white/10 shadow-2xl bg-[#0d1117]/80 backdrop-blur-md">
-          <div className="mb-6">
-            <h3 className="font-sans text-xl sm:text-2xl font-bold text-white mb-1.5">
-              Contact Form
+        {/* ── Contact Form Card with Glassmorphism & Cyber Glow ───────────────────────────────── */}
+        <div className="glass-card rounded-2xl p-6 sm:p-8 border border-[#6DB33F]/30 shadow-[0_20px_50px_rgba(0,0,0,0.7),0_0_30px_rgba(109,179,63,0.15)] bg-[#0d1117]/90 backdrop-blur-md">
+          <div className="mb-6 flex items-center justify-between border-b border-white/10 pb-4">
+            <h3 className="font-sans text-xl sm:text-2xl font-bold text-white">
+              Send a Message
             </h3>
-            
           </div>
 
           {submitted ? (
-            <div className="p-6 rounded-xl bg-[#6DB33F]/10 border border-[#6DB33F]/30 text-center space-y-2">
-              <div className="material-symbols-outlined text-[#6DB33F] text-3xl">check_circle</div>
-              <h4 className="text-white font-bold text-base">Message Sent Successfully!</h4>
-              <p className="text-text-secondary text-xs leading-relaxed">
+            <div className="p-8 rounded-xl bg-[#6DB33F]/15 border border-[#6DB33F]/40 text-center space-y-3 shadow-[0_0_25px_rgba(109,179,63,0.2)]">
+              <div className="material-symbols-outlined text-[#6DB33F] text-4xl animate-bounce">check_circle</div>
+              <h4 className="text-white font-bold text-lg">Message Transmitted Successfully!</h4>
+              <p className="text-slate-300 text-xs sm:text-sm leading-relaxed max-w-md mx-auto">
                 Thank you for reaching out. I've received your message and will respond as soon as possible.
               </p>
               <button
                 type="button"
                 onClick={() => setSubmitted(false)}
-                className="mt-3 px-4 py-1.5 text-xs font-mono text-[#6DB33F] border border-[#6DB33F]/40 rounded hover:bg-[#6DB33F]/10 transition-colors"
+                className="mt-4 px-5 py-2 text-xs font-mono font-bold text-slate-950 bg-[#6DB33F] rounded-lg hover:bg-[#85E042] transition-all shadow-[0_0_15px_rgba(109,179,63,0.4)]"
               >
                 Send Another Message
               </button>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-5">
               {/* Row 1: Name & Email */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-mono text-text-secondary mb-1.5 font-medium">
-                    Full name
+                  <label className="block text-xs font-mono text-slate-300 mb-1.5 font-medium flex items-center gap-1.5">
+                    <span className="text-[#6DB33F] font-bold">&gt;</span> Full Name
                   </label>
                   <input
                     type="text"
@@ -146,13 +148,13 @@ export function Contact() {
                     placeholder="Your Name"
                     value={formData.name}
                     onChange={e => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full bg-[#161b22] border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white placeholder-text-secondary/40 focus:outline-none focus:border-[#6DB33F] transition-colors"
+                    className="w-full bg-[#161b22] border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-[#6DB33F] focus:ring-2 focus:ring-[#6DB33F]/40 transition-all font-mono shadow-inner"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-mono text-text-secondary mb-1.5 font-medium">
-                    Email Address
+                  <label className="block text-xs font-mono text-slate-300 mb-1.5 font-medium flex items-center gap-1.5">
+                    <span className="text-[#6DB33F] font-bold">&gt;</span> Email Address
                   </label>
                   <input
                     type="email"
@@ -160,53 +162,52 @@ export function Contact() {
                     placeholder="you@example.com"
                     value={formData.email}
                     onChange={e => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full bg-[#161b22] border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white placeholder-text-secondary/40 focus:outline-none focus:border-[#6DB33F] transition-colors"
+                    className="w-full bg-[#161b22] border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-[#6DB33F] focus:ring-2 focus:ring-[#6DB33F]/40 transition-all font-mono shadow-inner"
                   />
                 </div>
               </div>
 
               {/* Row 2: Message */}
               <div>
-                <label className="block text-xs font-mono text-text-secondary mb-1.5 font-medium">
-                  Your Message
+                <label className="block text-xs font-mono text-slate-300 mb-1.5 font-medium flex items-center gap-1.5">
+                  <span className="text-[#6DB33F] font-bold">&gt;</span> Your Message
                 </label>
                 <textarea
                   required
                   rows={4}
-                  placeholder="Tell me about your project..."
+                  placeholder="Tell me about your project or inquiry..."
                   value={formData.message}
                   onChange={e => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full bg-[#161b22] border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white placeholder-text-secondary/40 focus:outline-none focus:border-[#6DB33F] transition-colors resize-none"
+                  className="w-full bg-[#161b22] border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-[#6DB33F] focus:ring-2 focus:ring-[#6DB33F]/40 transition-all font-mono resize-none shadow-inner"
                 />
               </div>
 
               {/* Disclaimer */}
-              <p className="text-[11px] text-text-secondary/50 font-mono pt-1">
-                I'll never share your data with anyone else. Pinky promise!
+              <p className="text-[11px] text-slate-400 font-mono pt-0.5">
+                // Direct transmission to inbox. No spam.
               </p>
 
               {/* Error Message */}
               {errorMessage && (
-                <div className="p-3 rounded-lg bg-red-500/10 border border-red-500/30 text-red-500 font-mono text-[11px] leading-relaxed">
+                <div className="p-3.5 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 font-mono text-xs leading-relaxed">
                   {errorMessage}
                 </div>
               )}
 
-              {/* Submit Button */}
+              {/* 3D Push Button */}
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full py-3 bg-[#161b22] hover:bg-white/10 border border-white/15 text-white font-mono text-xs uppercase tracking-wider font-bold rounded-lg transition-all flex items-center justify-center gap-2 group cursor-pointer disabled:opacity-50"
+                className="w-full py-3.5 bg-[#6DB33F] hover:bg-[#7bc749] text-slate-950 font-mono text-xs uppercase tracking-wider font-extrabold rounded-xl transition-all shadow-[0_4px_20px_rgba(109,179,63,0.35)] hover:shadow-[0_6px_30px_rgba(109,179,63,0.5)] active:translate-y-0.5 flex items-center justify-center gap-2 group cursor-pointer disabled:opacity-50"
               >
-                <span>{isSubmitting ? 'Sending Message...' : 'Send Message'}</span>
-                <span className="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">
+                <span>{isSubmitting ? 'Transmitting Message...' : 'Send Message'}</span>
+                <span className="material-symbols-outlined text-[18px] group-hover:translate-x-1.5 transition-transform font-bold">
                   arrow_forward
                 </span>
               </button>
             </form>
           )}
         </div>
-
       </div>
     </AnimatedSection>
   );
