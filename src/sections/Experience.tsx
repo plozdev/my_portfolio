@@ -7,6 +7,7 @@ interface ExperienceItem {
   period: string;
   location?: string;
   summary: string;
+  highlights?: string[];
   technologies: string[];
   icon: string;
   logoUrl?: string;
@@ -43,7 +44,14 @@ const experiences: ExperienceItem[] = [
     location: 'Ho Chi Minh City, Vietnam',
     summary:
       'Worked on a production enterprise Java legacy system for a Japanese client. Responsibilities involved understanding Design Documents and existing code, investigating business logic, fixing bugs and UI issues, and gradually moving into feature implementation alongside BA and QA teams.',
-    technologies: ['Java', 'Apache Struts', 'Apache Ant', 'Oracle Database', 'SQL', 'Git', 'Handle Terminal'],
+    highlights: [
+      'Developed a new master-data management feature end-to-end, implementing client/server-side validation, authorization, transactions, and optimistic concurrency control.',
+      'Optimized a complex database query used for CSV exports, improve 70% performance by reducing processing time from 10 seconds to 3 seconds.',
+      'Enhanced three existing warehouse management functions based on detailed design specifications, including transaction inquiry, barcode-based stock replenishment, and stock-count correction workflows.',
+      'Refactored multi-step handheld-terminal workflows, handling barcode validation, quantity conversions, and concurrency-related error handling.',
+      'Reviewed design specifications and conducted functional testing for a CSV-based data ingestion and processing-status module.',
+    ],
+    technologies: ['Java', 'Apache Struts', 'Apache Ant', 'Oracle Database', 'Git'],
     icon: 'work',
     logoUrl: '/images/companies/fpt-software.png',
     isCurrent: true,
@@ -55,7 +63,13 @@ const experiences: ExperienceItem[] = [
     location: 'Ho Chi Minh City, Vietnam',
     summary:
       'Focused on software engineering fundamentals, algorithm design, and system architecture. Active in ICPC competitive programming, community leadership, and hackathons.',
-    technologies: ['C', 'C++', 'Java', 'Spring Boot', 'Algorithms', 'Software Architecture', 'Git'],
+    highlights: [
+      'Awarded 59th Place at the 2025 ICPC Asia Ho Chi Minh City Regional Contest.',
+      "Awarded 18th Place at the 2025 ICPC Vietnam Southern Provincial Programming Contest.",
+      'Won Third Prize at the FPTU AI Innovation Hackathon Summer 2025 with team Softelligence.',
+      'Serving as Chapter Lead for Google Developer Groups on Campus (GDGoC) at FPTU, managing the community and organizing technical events for students.',
+    ],
+    technologies: ['C', 'C++', 'Java', 'Spring Boot', 'Algorithms', 'Competitive Programming', 'Software Architecture', 'Git'],
     icon: 'domain',
     logoUrl: '/images/school/fpt-university.png',
   },
@@ -66,6 +80,11 @@ const experiences: ExperienceItem[] = [
     location: 'Quang Ngai, Vietnam',
     summary:
       'Started programming seriously through an IT-specialized curriculum, building strong problem-solving foundations for competitive programming and software engineering.',
+    highlights: [
+      'Won First Prize in the Provincial Science & Technology Competition and represented the school at the National round.',
+      'Trained with the competitive programming team, studying advanced algorithms and data structures using C++ and Java.',
+      'Graduated with an IT-specialized curriculum, establishing solid foundations in computer science and logical problem-solving.',
+    ],
     technologies: ['C++', 'Java', 'Python', 'Algorithms', 'Data Structures', 'Competitive Programming'],
     icon: 'school',
     logoUrl: '/images/school/high-school.png',
@@ -129,10 +148,21 @@ export function Experience() {
                 </div>
               </div>
 
-              {/* 1-2 Sentence Summary */}
-              <p className="text-text-secondary font-body text-xs sm:text-sm leading-relaxed">
-                {exp.summary}
-              </p>
+              {/* Highlights or Summary */}
+              {exp.highlights && exp.highlights.length > 0 ? (
+                <ul className="space-y-2 text-text-secondary font-body text-xs sm:text-sm leading-relaxed mt-1">
+                  {exp.highlights.map((highlight, idx) => (
+                    <li key={idx} className="flex items-start gap-2">
+                      <span className="text-primary font-mono select-none mt-0.5 shrink-0 text-xs">→</span>
+                      <span>{highlight}</span>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="text-text-secondary font-body text-xs sm:text-sm leading-relaxed">
+                  {exp.summary}
+                </p>
+              )}
 
               {/* Compact Tech Stack Pills */}
               <div className="flex flex-wrap gap-1.5 pt-1">
