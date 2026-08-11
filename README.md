@@ -1,36 +1,42 @@
 # Hi there, I'm Hoang Mai (plozdev) 👋
 
-Welcome to my personal developer portfolio repository! I am a **Software Engineering Student** at **FPT University Ho Chi Minh City** with a deep passion for backend system design, database optimization, and modern frontend interfaces.
+Welcome to my personal developer portfolio repository! I am a **Backend Developer & Software Engineer** studying at **FPT University Ho Chi Minh City**, focused on backend system architecture, high-concurrency systems, database optimization, and modern interactive web experiences.
 
-✨ **[View My Live Portfolio](https://plozdev.id.vn)** *(Or replace with your actual live domain)*
+🌐 **[View Live Official Portfolio](https://plozdev.github.io/my_portfolio/)**
 
 ---
 
 ## 🚀 About Me
 
-- 🎓 **Education**: Software Engineering student at FPT University (GPA: **8.2/10**).
-- 🏆 **Competitive Programming**: Active participant in **ICPC Vietnam** rounds (Provincial, Southern, National).
+- 🎓 **Education**: Software Engineering student at FPT University Ho Chi Minh City.
+- 🏆 **Competitive Programming**: Active participant in **ICPC Vietnam** competitions (Provincial, Southern, National rounds).
 - 👥 **Community Leadership**: **Chapter Lead** at **GDGoC FPTU HCMC** (Google Developer Groups on Campus), hosting technical workshops and connecting student developers.
-- 💻 **Focus**: Designing high-concurrency architectures, distributed locking systems, and responsive user experiences.
+- 💻 **Focus**: Designing high-concurrency architectures, distributed locking systems, microservices, and interactive web experiences.
 
 ---
 
-## 🛠️ Tech Stack & Key Specialities
+## 🎨 Portfolio Features & Tech Stack
+
+- **3D & Cyberpunk Developer Vibe**: 3D Isometric tilt windows, volumetric glows, laser timeline, and interactive cyber grid background.
+- **Interactive Trailing Cursor**: 60fps spring-physics trailing cursor with dynamic hover target expansion.
+- **3D Floating Terminal Mockup**: Custom code stream preview for backend projects.
+- **Official HM Monogram Branding**: Custom vector SVG logo assets and favicons.
 
 <table>
   <tr>
     <td valign="top" width="50%">
       <strong>Backend & Infrastructure</strong><br>
       - ☕ Java 21, Spring Boot, Spring Security<br>
-      - ⚡ Redis, Redisson (Distributed Locks)<br>
-      - 🐳 Docker, Docker Compose<br>
-      - 🐘 PostgreSQL (Complex queries & indexes)
+      - ⚡ Redis, Redisson (Distributed Locks), Apache Kafka<br>
+      - 🐳 Docker, Docker Compose, Microservices<br>
+      - 🐘 PostgreSQL (Complex query optimization & indexing)
     </td>
     <td valign="top" width="50%">
-      <strong>Frontend & Scripting</strong><br>
-      - ⚛️ React 19, TypeScript, JavaScript<br>
+      <strong>Frontend & Visuals</strong><br>
+      - ⚛️ React 19, TypeScript, Vite<br>
       - 💨 Tailwind CSS v4, Framer Motion<br>
-      - 🕸️ Three.js (interactive 3D background node networks)
+      - 🕸️ Three.js (Interactive 3D particle & network canvas)<br>
+      - 🎯 Custom Interactive Trailing Cursor
     </td>
   </tr>
 </table>
@@ -40,44 +46,42 @@ Welcome to my personal developer portfolio repository! I am a **Software Enginee
 ## ⚡ Featured Project: TekcitYm
 A modular monolith backend system designed to handle high-concurrency seat reservations for massive flash-sale ticketing events.
 - **Problem solved**: Double-booking and overselling under heavy user concurrency.
-- **Tech Stack**: Java 21, Spring Boot, Redis, Redisson, PostgreSQL, Docker.
+- **Tech Stack**: Java 21, Spring Boot, Redis, Redisson, PostgreSQL, Docker, Apache Kafka.
 - **Key Solutions**: Distributed locking, automated seat TTL expirations, and a cache-aside pattern to reduce database query strain.
 
 ---
 
 ## 📬 Connect With Me
 
+- 🌐 **Website**: [plozdev.github.io/my_portfolio](https://plozdev.github.io/my_portfolio/)
 - 📧 **Email**: [hoangmai.it.dev@gmail.com](mailto:hoangmai.it.dev@gmail.com)
-- 💼 **LinkedIn**: [Hoang Mai](https://linkedin.com/in/plozdev) *(Or replace with your LinkedIn url)*
+- 💼 **LinkedIn**: [Hoang Mai](https://www.linkedin.com/in/hoangmai-it/)
 - 🐙 **GitHub**: [github.com/plozdev](https://github.com/plozdev)
 
 ---
 
 <details>
-<summary>🛠️ <strong>For Developers (Running the code locally)</strong></summary>
+<summary>🛠️ <strong>Local Development Setup</strong></summary>
 
-### 1. Prerequisites
-- Node.js (v18+ recommended)
-
-### 2. Installation & Setup
+### 1. Installation
 ```bash
 npm install
 ```
 
-### 3. Configuration (.env)
-Create a `.env` file at the root:
+### 2. Configuration (.env)
+Create a `.env` file in the root directory:
 ```env
-VITE_RESEND_API_KEY=re_your_api_key_here
+VITE_RESEND_API_KEY=your_resend_api_key
 VITE_RESEND_FROM=onboarding@resend.dev
 VITE_RESEND_TO=hoangmai.it.dev@gmail.com
 ```
 
-### 4. Running Dev Server
+### 3. Local Dev Server
 ```bash
 npm run dev
 ```
 
-### 5. Production Build
+### 4. Build for Production
 ```bash
 npm run build
 ```
