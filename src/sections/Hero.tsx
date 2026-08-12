@@ -40,7 +40,7 @@ export function Hero() {
             <span className="relative inline-flex rounded-full h-2 w-2 bg-[#6DB33F]"></span>
           </span>
           <span className="font-mono text-xs font-medium text-slate-300 tracking-wide uppercase">
-            Currently Building Projects · HCMC, Vietnam
+            Available for Opportunities · HCMC, Vietnam
           </span>
         </div>
 
@@ -84,9 +84,15 @@ export function Hero() {
                 <span>Resume / CV</span>
               </a>
 
-              {/* Row with Social Icons (Min 44x44px Touch Targets) */}
+              {/* Row with Hire Me (Secondary Green CTA 40%) & Social Icons (Min 44x44px Touch Targets) */}
               <div className="flex items-center gap-3 w-full">
-
+                {/* Hire Me Button - High Contrast Secondary Green CTA with Neon Border & Glow */}
+                <a
+                  href="#contact"
+                  className="flex-1 h-12 bg-[#6DB33F]/20 hover:bg-[#6DB33F] text-[#85E042] hover:text-slate-950 font-extrabold text-sm rounded-xl border-2 border-[#6DB33F] transition-all flex items-center justify-center shadow-[0_0_20px_rgba(109,179,63,0.3)] hover:shadow-[0_0_30px_rgba(109,179,63,0.5)]"
+                >
+                  Hire Me
+                </a>
                 {/* GitHub Icon Button (48x48px Touch Target) */}
                 <a
                   href="https://github.com/plozdev"
