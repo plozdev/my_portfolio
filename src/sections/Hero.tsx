@@ -1,5 +1,5 @@
 import { Suspense, lazy } from 'react';
-import { IDEPlayground } from '@/components/ui/IDEPlayground';
+import { InteractiveTerminal3D } from '@/components/ui/InteractiveTerminal3D';
 
 const SystemNetwork = lazy(() => import('@/components/three/SystemNetwork'));
 
@@ -125,24 +125,30 @@ export function Hero() {
           </div>
 
           {/* RIGHT: 3D Perspective Volumetric Terminal Window */}
-          <div className="flex justify-center lg:justify-end w-full relative z-20 group">
-            <div 
-              className="w-full transition-transform duration-500 ease-out transform lg:[transform:perspective(1200px)_rotateY(-7deg)_rotateX(4deg)] lg:group-hover:[transform:perspective(1200px)_rotateY(0deg)_rotateX(0deg)] shadow-[0_30px_70px_rgba(0,0,0,0.85),0_0_60px_rgba(109,179,63,0.25)] rounded-xl"
-            >
-              <IDEPlayground />
-            </div>
+          <div className="flex justify-center lg:justify-end w-full relative z-20">
+            <InteractiveTerminal3D />
           </div>
 
         </div>
       </div>
 
       {/* Bottom Floating Scroll Down Indicator Widget */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 pointer-events-none opacity-70 hover:opacity-100 transition-opacity">
-        <span className="font-mono text-[10px] uppercase tracking-widest text-slate-400">Scroll Down</span>
-        <div className="w-5 h-8 border-2 border-white/30 rounded-full flex justify-center p-1">
+      <a
+        href="#experience"
+        onClick={(e) => {
+          e.preventDefault();
+          document.getElementById('experience')?.scrollIntoView({ behavior: 'smooth' });
+        }}
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 cursor-pointer opacity-70 hover:opacity-100 transition-all hover:scale-105 group"
+        aria-label="Scroll down to Experience section"
+      >
+        <span className="font-mono text-[10px] uppercase tracking-widest text-slate-400 group-hover:text-[#6DB33F] transition-colors">
+          Scroll Down
+        </span>
+        <div className="w-5 h-8 border-2 border-white/30 group-hover:border-[#6DB33F]/60 rounded-full flex justify-center p-1 transition-colors">
           <div className="w-1 h-2 bg-[#6DB33F] rounded-full animate-bounce" />
         </div>
-      </div>
+      </a>
     </section>
   );
 }
