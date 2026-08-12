@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { ArrowUpRight, Maximize2 } from 'lucide-react';
 import { AnimatedSection } from '@/components/ui/AnimatedSection';
-import { PROJECTS_LIST, PROJECT_CATEGORIES, type ProjectData } from '@/config/projects';
+import { PROJECTS_LIST, type ProjectData } from '@/config/projects';
 import { ProjectModal } from '@/components/ui/ProjectModal';
 
 function ProjectCard({ project, onOpenModal }: { project: ProjectData; onOpenModal: (p: ProjectData) => void }) {
@@ -141,55 +141,26 @@ function ProjectCard({ project, onOpenModal }: { project: ProjectData; onOpenMod
 }
 
 export function Projects() {
-  const [activeCategory, setActiveCategory] = useState('all');
   const [selectedProject, setSelectedProject] = useState<ProjectData | null>(null);
-
-  const filteredProjects = PROJECTS_LIST.filter(
-    (p) => activeCategory === 'all' || p.category === activeCategory
-  );
 
   return (
     <AnimatedSection id="projects" className="py-16 px-4 sm:px-6 md:px-8 max-w-6xl mx-auto">
       {/* Section Title */}
-      <div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
-        <div>
-          <h2 className="font-sans text-3xl md:text-4xl leading-tight font-bold text-white flex items-center gap-2">
-            <span className="text-primary font-mono select-none">&gt;_</span>
-            Projects
-          </h2>
-          <p className="font-mono text-xs md:text-sm text-slate-400 tracking-wide mt-1">
-            Engineering work &amp; system architecture
-          </p>
-        </div>
-
-        {/* Category Filter Tabs */}
-        <div className="flex flex-wrap gap-2">
-          {PROJECT_CATEGORIES.map((cat) => {
-            const isActive = activeCategory === cat.id;
-            return (
-              <button
-                key={cat.id}
-                onClick={() => setActiveCategory(cat.id)}
-                className={`font-mono text-xs px-3.5 py-1.5 rounded-lg border transition-all ${
-                  isActive
-                    ? 'bg-[#6DB33F]/20 text-[#6DB33F] border-[#6DB33F]/60 font-bold shadow-[0_0_15px_rgba(109,179,63,0.2)]'
-                    : 'bg-white/5 text-slate-400 border-white/10 hover:text-white hover:border-white/25'
-                }`}
-              >
-                {cat.label}
-              </button>
-            );
-          })}
-        </div>
+      <div className="mb-10">
+        <h2 className="font-sans text-3xl md:text-4xl leading-tight font-bold text-white flex items-center gap-2">
+          <span className="text-primary font-mono select-none">&gt;_</span>
+          Projects
+        </h2>
+        <p className="font-mono text-xs md:text-sm text-slate-400 tracking-wide mt-1">
+          Engineering work &amp; system architecture
+        </p>
       </div>
 
       {/* Projects Grid Container */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-        <AnimatePresence mode="popLayout">
-          {filteredProjects.map((project) => (
-            <ProjectCard key={project.id} project={project} onOpenModal={setSelectedProject} />
-          ))}
-        </AnimatePresence>
+        {PROJECTS_LIST.map((project) => (
+          <ProjectCard key={project.id} project={project} onOpenModal={setSelectedProject} />
+        ))}
       </div>
 
       {/* Details Modal */}
