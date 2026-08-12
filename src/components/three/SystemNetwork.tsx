@@ -247,6 +247,8 @@ function Scene() {
 export default function SystemNetwork() {
   const reducedMotion = useReducedMotion();
   const [webglAvailable, setWebglAvailable] = useState(true);
+  const [isInView, setIsInView] = useState(true);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     try {
@@ -256,19 +258,32 @@ export default function SystemNetwork() {
     } catch {
       setWebglAvailable(false);
     }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+      },
+      { threshold: 0.05 }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => observer.disconnect();
   }, []);
 
   if (!webglAvailable) return <SystemNetworkFallback />;
 
   return (
-    <div className="absolute inset-0 w-full h-full" style={{ pointerEvents: 'none' }} aria-hidden="true">
+    <div ref={containerRef} className="absolute inset-0 w-full h-full" style={{ pointerEvents: 'none' }} aria-hidden="true">
       <Canvas
-        dpr={[1, 1.5]}
-        frameloop={reducedMotion ? 'demand' : 'always'}
+        dpr={[1, 1.25]}
+        frameloop={reducedMotion || !isInView ? 'never' : 'always'}
         camera={{ position: [0, 0, 10], fov: 70 }}
         gl={{ alpha: true, antialias: false, powerPreference: 'low-power' }}
       >
-        <Scene />
+        {isInView && <Scene />}
       </Canvas>
     </div>
   );

@@ -34,7 +34,7 @@ export function CustomCursor() {
       const isInteractive =
         target.closest('a, button, input, textarea, select, [role="button"], .group, .cursor-pointer') !== null;
 
-      setIsHovered(isInteractive);
+      setIsHovered((prev) => (prev !== isInteractive ? isInteractive : prev));
     };
 
     const handleMouseLeave = () => {
@@ -64,7 +64,7 @@ export function CustomCursor() {
     <>
       {/* Outer Glowing Trailing Ring */}
       <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-[9999] rounded-full border border-[#6DB33F]/60 bg-[#6DB33F]/10 backdrop-blur-[1px] shadow-[0_0_25px_rgba(109,179,63,0.3)] hidden md:block"
+        className="fixed top-0 left-0 pointer-events-none z-[9999] rounded-full border border-[#6DB33F]/60 bg-[#6DB33F]/10 shadow-[0_0_20px_rgba(109,179,63,0.3)] hidden md:block"
         style={{
           x: followerX,
           y: followerY,

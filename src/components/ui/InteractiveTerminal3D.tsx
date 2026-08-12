@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { IDEPlayground } from '@/components/ui/IDEPlayground';
 
 export function InteractiveTerminal3D() {
@@ -6,23 +6,29 @@ export function InteractiveTerminal3D() {
   const [rotateY, setRotateY] = useState(-7);
   const [glarePos, setGlarePos] = useState({ x: 50, y: 50 });
   const [isHovered, setIsHovered] = useState(false);
+  const rafRef = useRef<number | null>(null);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
 
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
+    if (rafRef.current) return;
 
-    const rotateXVal = ((y - centerY) / centerY) * -14;
-    const rotateYVal = ((x - centerX) / centerX) * 14;
+    rafRef.current = requestAnimationFrame(() => {
+      rafRef.current = null;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
 
-    setRotateX(rotateXVal);
-    setRotateY(rotateYVal);
-    setGlarePos({
-      x: (x / rect.width) * 100,
-      y: (y / rect.height) * 100,
+      const rotateXVal = ((y - centerY) / centerY) * -12;
+      const rotateYVal = ((x - centerX) / centerX) * 12;
+
+      setRotateX(rotateXVal);
+      setRotateY(rotateYVal);
+      setGlarePos({
+        x: (x / rect.width) * 100,
+        y: (y / rect.height) * 100,
+      });
     });
   };
 
