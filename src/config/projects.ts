@@ -19,6 +19,8 @@ export interface ProjectData {
   overview: string;
   keySolutions: { title: string; desc: string; icon?: string }[];
   github?: string;
+  githubBackend?: string;
+  githubFrontend?: string;
   live?: string;
 }
 
@@ -75,35 +77,35 @@ export const PROJECTS_LIST: ProjectData[] = [
       { src: '/images/projects/tekcitym-benchmarks.png', label: 'JMeter Load Testing & Performance Metrics' },
     ],
     skills: {
-      frontend: ['React', 'Tailwind CSS', 'TypeScript', 'Vite'],
-      backend: ['Java 21', 'Spring Boot', 'Redis', 'Redisson', 'Apache Kafka', 'PostgreSQL', 'Docker'],
+      frontend: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'Framer Motion'],
+      backend: ['Java 21', 'Spring Boot', 'Redis', 'Redisson', 'PostgreSQL', 'Docker'],
     },
     overview:
-      'High-concurrency ticket booking engine designed to handle massive surge traffic, preventing overbooking with Redisson distributed locking and Kafka event streaming.',
+      'High-concurrency ticket booking platform built with Spring Boot 4 / Java 21 backend and React 19 / Vite frontend, solving double-booking with Redisson distributed locking and JWT authentication.',
     keySolutions: [
       {
         title: 'Distributed Locking with Redisson',
-        desc: 'Implemented fair locking mechanisms using Redisson to guarantee single-winner seat reservation during flash sales.',
+        desc: 'Implemented fair locking mechanisms using Redisson over Redis to guarantee single-winner seat reservation during massive surge sales.',
         icon: 'lock',
       },
       {
-        title: 'Asynchronous Order Processing',
-        desc: 'Leveraged Apache Kafka event pipelines to decouple checkout flows from payment processing, reducing database load spikes by 65%.',
+        title: 'Stateless Security & JWT Auth',
+        desc: 'Secured API endpoints with Spring Security and JJWT stateless authentication tokens, paired with OAuth2 client flows.',
         icon: 'zap',
       },
       {
-        title: 'Multi-Level Caching Strategy',
-        desc: 'Utilized Redis L2 cache with TTL auto-eviction for high-frequency seat inventory reads with sub-5ms latency.',
+        title: 'Reactive & Caching Architecture',
+        desc: 'Leveraged Spring WebFlux & Spring Data JPA over PostgreSQL with Redis cache layers for high-throughput inventory reads.',
         icon: 'database',
       },
       {
-        title: 'Dockerized Microservices Environment',
-        desc: 'Containerized all microservices and infrastructure components with Docker Compose for seamless local and cloud deployments.',
+        title: 'Modern SPA Frontend Architecture',
+        desc: 'Built with React 19, TypeScript, TanStack Query, and Zustand for seamless real-time state management and fast UI renders.',
         icon: 'box',
       },
     ],
-    github: 'https://github.com/plozdev/tekcitym',
-    live: 'https://tekcitym.demo.internal',
+    githubBackend: 'https://github.com/plozdev/TekcitYm_backend',
+    githubFrontend: 'https://github.com/plozdev/TekcitYm_frontend',
   },
   {
     id: 'developer-portfolio',

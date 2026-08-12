@@ -217,7 +217,29 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
 
             {/* External Links */}
             <div className="flex flex-wrap items-center gap-4 pt-4 border-t border-white/10">
-              {project.github && (
+              {project.githubBackend && (
+                <a
+                  href={project.githubBackend}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="h-11 px-5 rounded-xl bg-white/5 hover:bg-[#6DB33F]/20 text-slate-200 hover:text-[#6DB33F] border border-white/15 hover:border-[#6DB33F]/50 font-mono text-xs font-bold flex items-center gap-2 transition-all shadow-sm"
+                >
+                  <GithubIcon className="w-4 h-4" />
+                  <span>Backend Repo</span>
+                </a>
+              )}
+              {project.githubFrontend && (
+                <a
+                  href={project.githubFrontend}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="h-11 px-5 rounded-xl bg-white/5 hover:bg-[#6DB33F]/20 text-slate-200 hover:text-[#6DB33F] border border-white/15 hover:border-[#6DB33F]/50 font-mono text-xs font-bold flex items-center gap-2 transition-all shadow-sm"
+                >
+                  <GithubIcon className="w-4 h-4" />
+                  <span>Frontend Repo</span>
+                </a>
+              )}
+              {!project.githubBackend && !project.githubFrontend && project.github && (
                 <a
                   href={project.github}
                   target="_blank"

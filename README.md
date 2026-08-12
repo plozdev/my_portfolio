@@ -44,10 +44,15 @@ Welcome to my personal developer portfolio repository! I am a **Backend Develope
 ---
 
 ## ⚡ Featured Project: TekcitYm
-A modular monolith backend system designed to handle high-concurrency seat reservations for massive flash-sale ticketing events.
-- **Problem solved**: Double-booking and overselling under heavy user concurrency.
-- **Tech Stack**: Java 21, Spring Boot, Redis, Redisson, PostgreSQL, Docker, Apache Kafka.
-- **Key Solutions**: Distributed locking, automated seat TTL expirations, and a cache-aside pattern to reduce database query strain.
+A high-concurrency ticket booking platform built with Spring Boot / Java 21 backend and React 19 / Vite frontend.
+- **Problem Solved**: Double-booking and overselling under heavy user surge traffic.
+- **Tech Stack**:
+  - **Backend**: Java 21, Spring Boot, Spring Security, JWT, Redis, Redisson, PostgreSQL, Docker.
+  - **Frontend**: React 19, TypeScript, Vite, Tailwind CSS v4, Framer Motion, TanStack Query, Zustand.
+- **Repositories**:
+  - 🖥️ **Backend Repo**: [github.com/plozdev/TekcitYm_backend](https://github.com/plozdev/TekcitYm_backend)
+  - 🌐 **Frontend Repo**: [github.com/plozdev/TekcitYm_frontend](https://github.com/plozdev/TekcitYm_frontend)
+- **Key Solutions**: Redisson distributed locking over Redis, JJWT stateless security, Spring Data JPA/WebFlux reactive caching layers, and Zustand/TanStack Query real-time UI state management.
 
 ---
 
