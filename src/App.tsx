@@ -1,4 +1,6 @@
 import { SEO } from './components/SEO';
+import { CustomCursor } from './components/ui/CustomCursor';
+import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
 import { Hero } from './sections/Hero';
 import { Experience } from './sections/Experience';
@@ -9,6 +11,8 @@ function App() {
   return (
     <>
       <SEO />
+      <CustomCursor />
+      <Navbar />
       <main>
         <Hero />
         <Experience />
@@ -21,3 +25,5 @@ function App() {
 }
 
 export default App;
+
+

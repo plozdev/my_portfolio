@@ -25,7 +25,7 @@ const PROFILE_COMMANDS: CommandItem[] = [
     command: 'whoami',
     type: 'key-value',
     items: [
-      { label: 'name', value: 'Anh Hoang Mai' },
+      { label: 'name', value: 'Hoang Mai' },
       { label: 'role', value: 'Backend Developer', highlight: true },
       { label: 'born', value: '01 Jul 2006' },
       { label: 'location', value: 'Ho Chi Minh City, Vietnam' },
@@ -35,10 +35,9 @@ const PROFILE_COMMANDS: CommandItem[] = [
     command: 'stack',
     type: 'lines',
     lines: [
-      { text: 'Java · Spring Boot · React · TypeScript ', primary: true },
-      { text: 'C++ · C# · Python · Kotlin · Android' },
-      { text: 'PostgreSQL · Oracle · MSSQL · Redis · Apache Kafka' },
-      { text: 'Git · GitHub · Docker · Google Cloud · Firebase' },
+      { text: 'Java · Spring Boot · Microservices', primary: true },
+      { text: 'PostgreSQL · Redis · Apache Kafka' },
+      { text: 'Docker · Kubernetes · GCP · Git' },
     ],
   },
   {
@@ -48,7 +47,7 @@ const PROFILE_COMMANDS: CommandItem[] = [
       { label: 'work', value: 'FPT Software' },
       { label: 'position', value: 'Software Engineer Intern' },
       { label: 'school', value: 'FPT University' },
-      { label: 'degree', value: 'Software Engineering (GPA 8.2/10)' },
+      { label: 'degree', value: 'Software Engineering' },
       { label: 'status', value: 'online', isStatus: true },
     ],
   },
@@ -57,16 +56,7 @@ const PROFILE_COMMANDS: CommandItem[] = [
     type: 'lines',
     lines: [
       { text: 'backend engineering', highlight: true },
-      { text: 'distributed systems' },
-      { text: 'system design & high-concurrency' },
-    ],
-  },
-  {
-    command: 'community',
-    type: 'key-value',
-    items: [
-      { label: 'lead', value: 'GDGoC FPTU HCMC' },
-      { label: 'academics', value: 'ICPC Competitor' },
+      { text: 'high-concurrency systems' },
     ],
   },
 ];
@@ -149,10 +139,10 @@ export function ProfileTerminal() {
         </div>
       </div>
 
-      {/* Terminal Content Body */}
+      {/* Terminal Content Body - Increased height & padding to prevent bottom text overflow */}
       <div
         ref={terminalBodyRef}
-        className="h-[340px] p-4 sm:p-5 overflow-y-auto scrollbar-hide font-mono text-xs sm:text-[13px] leading-[22px] text-[#c9d1d9] bg-[#0d1117] space-y-4"
+        className="h-[360px] p-4 sm:p-5 pb-8 overflow-y-auto scrollbar-hide font-mono text-xs sm:text-[13px] leading-[22px] text-[#c9d1d9] bg-[#0d1117] space-y-3.5"
       >
         {PROFILE_COMMANDS.map((cmdItem, idx) => {
           const isCurrentStep = idx === stepIndex;
@@ -167,7 +157,7 @@ export function ProfileTerminal() {
           const showOutput = isPastStep || isFinished || (!isTypingCommand && isCurrentStep);
 
           return (
-            <div key={cmdItem.command} className="space-y-1.5">
+            <div key={cmdItem.command} className="space-y-1">
               {/* Prompt & Command */}
               <div className="flex items-center gap-2 text-white">
                 <span className="text-[#6DB33F] font-bold">$</span>
@@ -179,12 +169,12 @@ export function ProfileTerminal() {
 
               {/* Command Output */}
               {showOutput && (
-                <div className="pl-3.5 border-l-2 border-[#6DB33F]/30 space-y-1.5 my-1 text-text-secondary">
+                <div className="pl-3.5 border-l-2 border-[#6DB33F]/40 space-y-1 my-1 text-text-secondary">
                   {cmdItem.type === 'key-value' && cmdItem.items && (
-                    <div className="space-y-1">
+                    <div className="space-y-0.5">
                       {cmdItem.items.map(item => (
                         <div key={item.label} className="flex gap-2">
-                          <span className="w-20 shrink-0 text-text-secondary/60 font-mono">
+                          <span className="w-20 shrink-0 text-text-secondary/70 font-mono">
                             {item.label}
                           </span>
                           <span className="text-text-secondary/40">:</span>
@@ -193,8 +183,8 @@ export function ProfileTerminal() {
                               item.highlight
                                 ? 'text-[#6DB33F] font-bold'
                                 : item.isStatus
-                                ? 'text-[#6DB33F] font-medium flex items-center gap-1.5'
-                                : 'text-white/90 font-medium'
+                                  ? 'text-[#6DB33F] font-medium flex items-center gap-1.5'
+                                  : 'text-white/90 font-medium'
                             }
                           >
                             {item.isStatus && (
@@ -216,14 +206,14 @@ export function ProfileTerminal() {
                             line.highlight
                               ? 'text-[#6DB33F] font-bold'
                               : line.primary
-                              ? 'text-white font-medium'
-                              : 'text-text-secondary'
+                                ? 'text-white font-medium'
+                                : 'text-text-secondary'
                           }
                         >
                           {line.primary ? (
                             <span>
                               <span className="text-[#6DB33F] font-bold">Java</span> ·{' '}
-                              <span className="text-[#6DB33F] font-bold">Spring Boot</span> · React · TypeScript
+                              <span className="text-[#6DB33F] font-bold">Spring Boot</span> · Microservices
                             </span>
                           ) : (
                             line.text
