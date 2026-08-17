@@ -20,44 +20,32 @@ export function Contact() {
     setErrorMessage('');
 
     try {
-      const apiKey = import.meta.env.VITE_RESEND_API_KEY;
-      const fromEmail = import.meta.env.VITE_RESEND_FROM || 'onboarding@resend.dev';
-      const toEmail = import.meta.env.VITE_RESEND_TO || 'hoangmai.it.dev@gmail.com';
+      const targetEmail = import.meta.env.VITE_CONTACT_EMAIL || siteConfig.email || 'hoangmai.it.dev@gmail.com';
 
-      if (!apiKey) {
-        throw new Error('Vui lòng thêm VITE_RESEND_API_KEY vào tệp .env');
-      }
-
-      // Check if we are running in local dev or production
-      const isDev = import.meta.env.DEV;
-      const url = isDev ? '/api-resend/emails' : 'https://api.resend.com/emails';
-
-      const response = await fetch(url, {
+      const response = await fetch(`https://formsubmit.co/ajax/${targetEmail}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${apiKey}`,
+          'Accept': 'application/json',
         },
         body: JSON.stringify({
-          from: fromEmail,
-          to: toEmail,
-          subject: `Portfolio Message from ${formData.name}`,
-          html: `<div style="font-family: sans-serif; padding: 20px; border: 1px solid #eee; border-radius: 8px;">
-            <h3 style="color: #6DB33F;">New Message from Portfolio</h3>
-            <p><strong>Sender:</strong> ${formData.name} (<a href="mailto:${formData.email}">${formData.email}</a>)</p>
-            <p><strong>Message:</strong></p>
-            <div style="background: #f9f9f9; padding: 15px; border-radius: 4px; white-space: pre-wrap;">${formData.message}</div>
-          </div>`,
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          _subject: `[Portfolio] New message from ${formData.name}`,
+          _template: 'table',
+          _captcha: 'false',
         }),
       });
 
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData?.message || `API error with status ${response.status}`);
-      }
+      const data = await response.json().catch(() => ({}));
 
-      setSubmitted(true);
-      setFormData({ name: '', email: '', message: '' });
+      if (response.ok && (data.success === 'true' || data.success === true || data.message)) {
+        setSubmitted(true);
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        throw new Error(data.message || `Lỗi gửi tin nhắn (${response.status})`);
+      }
     } catch (err: any) {
       console.error('Error sending message:', err);
       setErrorMessage(err.message || 'Có lỗi xảy ra khi gửi tin nhắn. Vui lòng thử lại sau.');
