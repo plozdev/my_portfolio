@@ -4,23 +4,110 @@ import { siteConfig } from '@/config/site';
 
 const email = siteConfig.email ?? 'hoangmai.it.dev@gmail.com';
 
+// Common disposable / temp email providers blacklist
+const DISPOSABLE_DOMAINS = new Set([
+  '10minutemail.com',
+  'mailinator.com',
+  'tempmail.com',
+  'temp-mail.org',
+  'guerrillamail.com',
+  'guerrillamail.net',
+  'guerrillamail.org',
+  'yopmail.com',
+  'yopmail.net',
+  'trashmail.com',
+  'trashmail.net',
+  'sharklasers.com',
+  'throwawaymail.com',
+  'dispostable.com',
+  'getairmail.com',
+  'nada.ltd',
+  'mohmal.com',
+  'burnermail.io',
+  'inboxkitten.com',
+  'crazymailing.com',
+  'tempail.com',
+  'fakemailgenerator.com',
+]);
+
+const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
+const COOLDOWN_MS = 60 * 1000; // 60 seconds rate limit per submission
+
 export function Contact() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     message: '',
   });
+  const [honeypot, setHoneypot] = useState(''); // Bot trap field
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
+  const validateForm = (): string | null => {
+    const trimmedName = formData.name.trim();
+    const trimmedEmail = formData.email.trim().toLowerCase();
+    const trimmedMessage = formData.message.trim();
+
+    if (trimmedName.length < 2) {
+      return 'Vui lòng nhập tên hợp lệ (tối thiểu 2 ký tự).';
+    }
+
+    if (!EMAIL_REGEX.test(trimmedEmail)) {
+      return 'Địa chỉ email không đúng định dạng. Vui lòng kiểm tra lại.';
+    }
+
+    const domain = trimmedEmail.split('@')[1];
+    if (!domain || !domain.includes('.') || domain.split('.').pop()!.length < 2) {
+      return 'Tên miền email không hợp lệ.';
+    }
+
+    if (DISPOSABLE_DOMAINS.has(domain)) {
+      return 'Email tạm thời (disposable email) không được chấp nhận. Vui lòng dùng email thực tế.';
+    }
+
+    if (trimmedMessage.length < 10) {
+      return 'Tin nhắn quá ngắn. Vui lòng nhập nội dung tối thiểu 10 ký tự.';
+    }
+
+    // Rate Limit Check
+    const lastSubmitTime = localStorage.getItem('portfolio_last_contact_submit');
+    if (lastSubmitTime) {
+      const timeSinceLast = Date.now() - parseInt(lastSubmitTime, 10);
+      if (timeSinceLast < COOLDOWN_MS) {
+        const remainingSeconds = Math.ceil((COOLDOWN_MS - timeSinceLast) / 1000);
+        return `Bạn đang gửi quá nhanh. Vui lòng đợi ${remainingSeconds} giây nữa trước khi gửi tiếp.`;
+      }
+    }
+
+    return null;
+  };
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
     setErrorMessage('');
+
+    // 1. Silent Bot Trap: if honeypot was populated by automated bot, fake success without sending
+    if (honeypot.trim().length > 0) {
+      setSubmitted(true);
+      setFormData({ name: '', email: '', message: '' });
+      return;
+    }
+
+    // 2. Strict validation & Rate-limit check
+    const validationError = validateForm();
+    if (validationError) {
+      setErrorMessage(validationError);
+      return;
+    }
+
+    setIsSubmitting(true);
 
     try {
       const targetEmail = import.meta.env.VITE_CONTACT_EMAIL || siteConfig.email || 'hoangmai.it.dev@gmail.com';
+      const cleanName = formData.name.trim();
+      const cleanEmail = formData.email.trim().toLowerCase();
+      const cleanMessage = formData.message.trim();
 
       const response = await fetch(`https://formsubmit.co/ajax/${targetEmail}`, {
         method: 'POST',
@@ -29,10 +116,11 @@ export function Contact() {
           'Accept': 'application/json',
         },
         body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          message: formData.message,
-          _subject: `[Portfolio] New message from ${formData.name}`,
+          name: cleanName,
+          email: cleanEmail,
+          message: cleanMessage,
+          _honey: honeypot,
+          _subject: `[Portfolio] New message from ${cleanName}`,
           _template: 'table',
           _captcha: 'false',
         }),
@@ -41,6 +129,8 @@ export function Contact() {
       const data = await response.json().catch(() => ({}));
 
       if (response.ok && (data.success === 'true' || data.success === true || data.message)) {
+        // Record timestamp for rate limiting
+        localStorage.setItem('portfolio_last_contact_submit', Date.now().toString());
         setSubmitted(true);
         setFormData({ name: '', email: '', message: '' });
       } else {
@@ -124,6 +214,20 @@ export function Contact() {
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-5">
+              {/* ── Anti-Bot Honeypot Trap (Hidden from real users) ── */}
+              <div className="hidden opacity-0 pointer-events-none absolute -left-[9999px]" aria-hidden="true">
+                <label htmlFor="contact_field_honey">Do not fill this field</label>
+                <input
+                  id="contact_field_honey"
+                  type="text"
+                  name="_honey"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={honeypot}
+                  onChange={e => setHoneypot(e.target.value)}
+                />
+              </div>
+
               {/* Row 1: Name & Email */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
