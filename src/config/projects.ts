@@ -65,48 +65,48 @@ export const getSkillItem = (name: string): SkillItem => {
 };
 
 export const PROJECTS_LIST: ProjectData[] = [
-  {
-    id: 'tekcitym',
-    category: 'backend',
-    title: 'TekcitYm',
-    status: 'ACTIVE BUILD',
-    src: '/images/projects/tekcitym-banner.png',
-    screenshots: [
-      { src: '/images/projects/tekcitym-architecture.png', label: 'High-Concurrency System Architecture' },
-      { src: '/images/projects/tekcitym-redis-lock.png', label: 'Redisson Distributed Locking Sequence' },
-      { src: '/images/projects/tekcitym-benchmarks.png', label: 'JMeter Load Testing & Performance Metrics' },
-    ],
-    skills: {
-      frontend: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'Framer Motion'],
-      backend: ['Java 21', 'Spring Boot', 'Redis', 'Redisson', 'PostgreSQL', 'Docker'],
-    },
-    overview:
-      'High-concurrency ticket booking platform built with Spring Boot 4 / Java 21 backend and React 19 / Vite frontend, solving double-booking with Redisson distributed locking and JWT authentication.',
-    keySolutions: [
-      {
-        title: 'Distributed Locking with Redisson',
-        desc: 'Implemented fair locking mechanisms using Redisson over Redis to guarantee single-winner seat reservation during massive surge sales.',
-        icon: 'lock',
-      },
-      {
-        title: 'Stateless Security & JWT Auth',
-        desc: 'Secured API endpoints with Spring Security and JJWT stateless authentication tokens, paired with OAuth2 client flows.',
-        icon: 'zap',
-      },
-      {
-        title: 'Reactive & Caching Architecture',
-        desc: 'Leveraged Spring WebFlux & Spring Data JPA over PostgreSQL with Redis cache layers for high-throughput inventory reads.',
-        icon: 'database',
-      },
-      {
-        title: 'Modern SPA Frontend Architecture',
-        desc: 'Built with React 19, TypeScript, TanStack Query, and Zustand for seamless real-time state management and fast UI renders.',
-        icon: 'box',
-      },
-    ],
-    githubBackend: 'https://github.com/plozdev/TekcitYm_backend',
-    githubFrontend: 'https://github.com/plozdev/TekcitYm_frontend',
-  },
+  // {
+  //   id: 'tekcitym',
+  //   category: 'backend',
+  //   title: 'TekcitYm',
+  //   status: 'ACTIVE BUILD',
+  //   src: '/images/projects/tekcitym-banner.png',
+  //   screenshots: [
+  //     { src: '/images/projects/tekcitym-architecture.png', label: 'High-Concurrency System Architecture' },
+  //     { src: '/images/projects/tekcitym-redis-lock.png', label: 'Redisson Distributed Locking Sequence' },
+  //     { src: '/images/projects/tekcitym-benchmarks.png', label: 'JMeter Load Testing & Performance Metrics' },
+  //   ],
+  //   skills: {
+  //     frontend: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'Framer Motion'],
+  //     backend: ['Java 21', 'Spring Boot', 'Redis', 'Redisson', 'PostgreSQL', 'Docker'],
+  //   },
+  //   overview:
+  //     'High-concurrency ticket booking platform built with Spring Boot 4 / Java 21 backend and React 19 / Vite frontend, solving double-booking with Redisson distributed locking and JWT authentication.',
+  //   keySolutions: [
+  //     {
+  //       title: 'Distributed Locking with Redisson',
+  //       desc: 'Implemented fair locking mechanisms using Redisson over Redis to guarantee single-winner seat reservation during massive surge sales.',
+  //       icon: 'lock',
+  //     },
+  //     {
+  //       title: 'Stateless Security & JWT Auth',
+  //       desc: 'Secured API endpoints with Spring Security and JJWT stateless authentication tokens, paired with OAuth2 client flows.',
+  //       icon: 'zap',
+  //     },
+  //     {
+  //       title: 'Reactive & Caching Architecture',
+  //       desc: 'Leveraged Spring WebFlux & Spring Data JPA over PostgreSQL with Redis cache layers for high-throughput inventory reads.',
+  //       icon: 'database',
+  //     },
+  //     {
+  //       title: 'Modern SPA Frontend Architecture',
+  //       desc: 'Built with React 19, TypeScript, TanStack Query, and Zustand for seamless real-time state management and fast UI renders.',
+  //       icon: 'box',
+  //     },
+  //   ],
+  //   githubBackend: 'https://github.com/plozdev/TekcitYm_backend',
+  //   githubFrontend: 'https://github.com/plozdev/TekcitYm_frontend',
+  // },
   {
     id: 'developer-portfolio',
     category: 'web',
