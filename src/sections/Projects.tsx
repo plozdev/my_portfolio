@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { ArrowUpRight, Maximize2 } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowUpRight, Maximize2, Smartphone, Monitor } from 'lucide-react';
 import { AnimatedSection } from '@/components/ui/AnimatedSection';
-import { PROJECTS_LIST, type ProjectData } from '@/config/projects';
+import { PROJECTS_LIST, PROJECT_CATEGORIES, type ProjectData } from '@/config/projects';
 import { ProjectModal } from '@/components/ui/ProjectModal';
 
 function ProjectCard({ project, onOpenModal }: { project: ProjectData; onOpenModal: (p: ProjectData) => void }) {
@@ -38,83 +38,145 @@ function ProjectCard({ project, onOpenModal }: { project: ProjectData; onOpenMod
       onClick={() => onOpenModal(project)}
       className="group relative rounded-2xl border border-white/10 bg-[#0d1117]/90 backdrop-blur-md overflow-hidden cursor-pointer hover:border-[#6DB33F]/70 hover:shadow-[0_15px_45px_rgba(0,0,0,0.85),0_0_30px_rgba(109,179,63,0.2)] transition-all duration-300 flex flex-col"
     >
-      {/* ── Image Preview Area with Automatic Continuous Parallax Motion ── */}
-      <div className="relative h-52 sm:h-60 w-full bg-[#070b07] overflow-hidden border-b border-white/10">
-        {!hasError ? (
-          <div className="relative w-full h-full overflow-hidden">
-            {/* Automatic Continuous Parallax Scroll Image Container (No hover required, 100% Crisp) */}
-            <motion.div
-              className="w-full h-full bg-cover"
-              style={{ backgroundImage: `url(${resolvedUrl})` }}
-              animate={{
-                backgroundPosition: ['50% 0%', '50% 100%', '50% 100%', '50% 0%', '50% 0%'],
-              }}
-              transition={{
-                duration: 12,
-                ease: 'easeInOut',
-                repeat: Infinity,
-                times: [0, 0.45, 0.55, 0.95, 1],
-              }}
-            />
+      {/* ── Image Preview Area: Mobile Frame Mockup vs Web Banner ── */}
+      {project.isMobile ? (
+        /* Mobile Project Showcase Area */
+        <div className="relative h-64 sm:h-72 w-full bg-gradient-to-b from-[#091109] via-[#070b07] to-[#0d1117] overflow-hidden border-b border-white/10 flex items-center justify-center p-3">
+          {/* Cyber Dot-Matrix Background Pattern */}
+          <div className="absolute inset-0 bg-[radial-gradient(#ffffff0a_1px,transparent_1px)] [background-size:14px_14px] pointer-events-none" />
 
-            {/* Hidden img tag for onError detection */}
-            <img
-              src={resolvedUrl}
-              alt=""
-              className="hidden"
-              onError={handleImgError}
-            />
+          {/* Ambient Radial Glow behind device */}
+          <div className="absolute w-44 h-44 rounded-full bg-[#6DB33F]/15 blur-2xl pointer-events-none group-hover:bg-[#6DB33F]/25 group-hover:scale-125 transition-all duration-500" />
 
-            {/* Cyber Scanline Glow Line across Image */}
-            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#6DB33F] to-transparent opacity-0 group-hover:opacity-100 transition-opacity z-20 pointer-events-none shadow-[0_0_15px_#6DB33F]" />
+          {/* Smartphone Bezel Mockup Frame */}
+          <div className="relative h-[92%] aspect-[9/18.5] rounded-[22px] p-1 bg-gradient-to-b from-slate-700 via-slate-900 to-black border border-white/25 shadow-[0_12px_35px_rgba(0,0,0,0.9),0_0_20px_rgba(109,179,63,0.15)] group-hover:border-[#6DB33F]/70 group-hover:shadow-[0_16px_40px_rgba(0,0,0,0.95),0_0_30px_rgba(109,179,63,0.35)] transition-all duration-300 transform group-hover:-translate-y-1 flex flex-col z-10">
+            {/* Dynamic Island / Punch Hole */}
+            <div className="absolute top-2 left-1/2 -translate-x-1/2 w-9 h-2 bg-black rounded-full z-20 flex items-center justify-center pointer-events-none shadow-sm">
+              <div className="w-1.5 h-1.5 rounded-full bg-slate-800 ml-auto mr-1.5" />
+            </div>
+
+            {/* Inner Phone Screen */}
+            <div className="w-full h-full rounded-[18px] overflow-hidden bg-black relative">
+              {!hasError ? (
+                <img
+                  src={resolvedUrl}
+                  alt={project.title}
+                  className="w-full h-full object-cover object-top"
+                  onError={handleImgError}
+                />
+              ) : (
+                <div className="w-full h-full p-2 flex flex-col justify-center items-center text-center font-mono text-[10px] text-slate-400 bg-[#0d1117]">
+                  <Smartphone className="w-6 h-6 text-[#6DB33F] mb-1" />
+                  <span>KMP Mobile</span>
+                </div>
+              )}
+
+              {/* Glass Reflection Highlight */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-white/10 pointer-events-none rounded-[18px]" />
+
+              {/* Scanline Sweep on hover */}
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#6DB33F] to-transparent opacity-0 group-hover:opacity-100 transition-opacity z-20 pointer-events-none shadow-[0_0_15px_#6DB33F]" />
+            </div>
           </div>
-        ) : (
-          /* High-Tech Terminal Visual Fallback */
-          <div className="w-full h-full p-4 flex flex-col justify-between bg-[#0d1117] relative">
-            <div className="flex items-center justify-between border-b border-white/10 pb-2">
-              <div className="flex items-center gap-1.5">
-                <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]" />
-                <div className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
-                <div className="w-2.5 h-2.5 rounded-full bg-[#27c93f]" />
+
+          {/* Device Category Badge in Corner */}
+          <div className="absolute top-3 right-3 z-20">
+            <span className="font-mono text-[9px] font-bold text-slate-300 bg-[#0d1117]/90 border border-white/15 px-2 py-0.5 rounded-md flex items-center gap-1 backdrop-blur-md shadow">
+              <Smartphone className="w-2.5 h-2.5 text-[#6DB33F]" />
+              KMP / Compose
+            </span>
+          </div>
+
+          {/* Status Badge */}
+          <div className="absolute top-3 left-3 z-20">
+            <span className="font-mono text-[10px] font-bold text-[#6DB33F] bg-[#0d1117]/90 border border-[#6DB33F]/50 px-2.5 py-1 rounded-md uppercase tracking-wider shadow-md backdrop-blur-md">
+              {project.status}
+            </span>
+          </div>
+
+          {/* Hover Overlay with Maximize Icon */}
+          <div className="absolute inset-0 bg-[#0d1117]/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center z-20 pointer-events-none">
+            <div className="w-12 h-12 rounded-full bg-[#6DB33F] text-slate-950 flex items-center justify-center shadow-[0_0_25px_rgba(109,179,63,0.8)] transform scale-75 group-hover:scale-100 transition-transform font-bold">
+              <Maximize2 className="w-5 h-5" />
+            </div>
+          </div>
+        </div>
+      ) : (
+        /* Web / Banner Project Showcase Area */
+        <div className="relative h-52 sm:h-60 w-full bg-[#070b07] overflow-hidden border-b border-white/10">
+          {!hasError ? (
+            <div className="relative w-full h-full overflow-hidden">
+              {/* Automatic Continuous Parallax Scroll Image Container */}
+              <motion.div
+                className="w-full h-full bg-cover"
+                style={{ backgroundImage: `url(${resolvedUrl})` }}
+                animate={{
+                  backgroundPosition: ['50% 0%', '50% 100%', '50% 100%', '50% 0%', '50% 0%'],
+                }}
+                transition={{
+                  duration: 12,
+                  ease: 'easeInOut',
+                  repeat: Infinity,
+                  times: [0, 0.45, 0.55, 0.95, 1],
+                }}
+              />
+
+              <img src={resolvedUrl} alt="" className="hidden" onError={handleImgError} />
+
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#6DB33F] to-transparent opacity-0 group-hover:opacity-100 transition-opacity z-20 pointer-events-none shadow-[0_0_15px_#6DB33F]" />
+            </div>
+          ) : (
+            <div className="w-full h-full p-4 flex flex-col justify-between bg-[#0d1117] relative">
+              <div className="flex items-center justify-between border-b border-white/10 pb-2">
+                <div className="flex items-center gap-1.5">
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#27c93f]" />
+                </div>
+                <span className="font-mono text-[11px] text-slate-400 font-semibold">
+                  dev@{project.id}:~
+                </span>
               </div>
-              <span className="font-mono text-[11px] text-slate-400 font-semibold">
-                dev@{project.id}:~
-              </span>
-            </div>
 
-            <div className="font-mono text-xs text-slate-300 space-y-1 my-auto">
-              <p className="text-[#6DB33F] font-bold">&gt; INITIALIZING SYSTEM ARCHITECTURE</p>
-              <ul className="pl-3 space-y-0.5 text-slate-400 text-[11px]">
-                {project.skills.backend.slice(0, 3).map((tech) => (
-                  <li key={tech}>• {tech}</li>
-                ))}
-                <li className="text-[#6DB33F] font-semibold">• Status: 200 OK [{project.status}]</li>
-              </ul>
+              <div className="font-mono text-xs text-slate-300 space-y-1 my-auto">
+                <p className="text-[#6DB33F] font-bold">&gt; INITIALIZING SYSTEM ARCHITECTURE</p>
+                <ul className="pl-3 space-y-0.5 text-slate-400 text-[11px]">
+                  {project.skills.backend.slice(0, 3).map((tech) => (
+                    <li key={tech}>• {tech}</li>
+                  ))}
+                  <li className="text-[#6DB33F] font-semibold">• Status: 200 OK [{project.status}]</li>
+                </ul>
+              </div>
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-[#6DB33F]/10 rounded-full blur-2xl pointer-events-none" />
             </div>
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-[#6DB33F]/10 rounded-full blur-2xl pointer-events-none" />
+          )}
+
+          <div className="absolute top-3 right-3 z-20">
+            <span className="font-mono text-[9px] font-bold text-slate-300 bg-[#0d1117]/90 border border-white/15 px-2 py-0.5 rounded-md flex items-center gap-1 backdrop-blur-md shadow">
+              <Monitor className="w-2.5 h-2.5 text-[#6DB33F]" />
+              WEB APP
+            </span>
           </div>
-        )}
 
-        {/* Crisp Hover Overlay with Maximize Icon (No Blur filter to keep image 100% clear) */}
-        <div className="absolute inset-0 bg-[#0d1117]/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center z-10">
-          <div className="w-12 h-12 rounded-full bg-[#6DB33F] text-slate-950 flex items-center justify-center shadow-[0_0_25px_rgba(109,179,63,0.8)] transform scale-75 group-hover:scale-100 transition-transform font-bold">
-            <Maximize2 className="w-5 h-5" />
+          <div className="absolute top-3 left-3 z-20">
+            <span className="font-mono text-[10px] font-bold text-[#6DB33F] bg-[#0d1117]/90 border border-[#6DB33F]/50 px-2.5 py-1 rounded-md uppercase tracking-wider shadow-md backdrop-blur-md">
+              {project.status}
+            </span>
+          </div>
+
+          <div className="absolute inset-0 bg-[#0d1117]/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center z-10 pointer-events-none">
+            <div className="w-12 h-12 rounded-full bg-[#6DB33F] text-slate-950 flex items-center justify-center shadow-[0_0_25px_rgba(109,179,63,0.8)] transform scale-75 group-hover:scale-100 transition-transform font-bold">
+              <Maximize2 className="w-5 h-5" />
+            </div>
           </div>
         </div>
-
-        {/* Status Badge Tag */}
-        <div className="absolute top-3 left-3 z-20">
-          <span className="font-mono text-[10px] font-bold text-[#6DB33F] bg-[#0d1117]/90 border border-[#6DB33F]/50 px-2.5 py-1 rounded-md uppercase tracking-wider shadow-md backdrop-blur-md">
-            {project.status}
-          </span>
-        </div>
-      </div>
+      )}
 
       {/* Card Content Footer */}
       <div className="p-6 flex flex-col justify-between flex-1 space-y-4">
         <div>
           <div className="flex items-center justify-between">
-            <h3 className="font-sans text-xl font-bold text-white group-hover:text-[#6DB33F] transition-colors">
+            <h3 className="font-sans text-lg font-bold text-white group-hover:text-[#6DB33F] transition-colors">
               {project.title}
             </h3>
             <ArrowUpRight className="w-5 h-5 text-slate-400 group-hover:text-[#6DB33F] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
@@ -142,26 +204,70 @@ function ProjectCard({ project, onOpenModal }: { project: ProjectData; onOpenMod
 
 export function Projects() {
   const [selectedProject, setSelectedProject] = useState<ProjectData | null>(null);
+  const [activeCategory, setActiveCategory] = useState<string>('all');
+
+  const filteredProjects =
+    activeCategory === 'all'
+      ? PROJECTS_LIST
+      : PROJECTS_LIST.filter((p) => p.category === activeCategory);
 
   return (
     <AnimatedSection id="projects" className="py-16 px-4 sm:px-6 md:px-8 max-w-6xl mx-auto">
       {/* Section Title */}
-      <div className="mb-10">
-        <h2 className="font-sans text-3xl md:text-4xl leading-tight font-bold text-white flex items-center gap-2">
+      <div className="mb-8">
+        <h2 className="font-sans text-2xl md:text-3xl leading-tight font-bold text-white flex items-center gap-2">
           <span className="text-primary font-mono select-none">&gt;_</span>
           Projects
         </h2>
         <p className="font-mono text-xs md:text-sm text-slate-400 tracking-wide mt-1">
-          Engineering work &amp; system architecture
+          Engineering work, multiplatform applications &amp; systems architecture
         </p>
       </div>
 
-      {/* Projects Grid Container */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-        {PROJECTS_LIST.map((project) => (
-          <ProjectCard key={project.id} project={project} onOpenModal={setSelectedProject} />
-        ))}
+      {/* Category Filter Tabs */}
+      <div className="flex flex-wrap items-center gap-2 mb-8">
+        {PROJECT_CATEGORIES.map((cat) => {
+          const count =
+            cat.id === 'all'
+              ? PROJECTS_LIST.length
+              : PROJECTS_LIST.filter((p) => p.category === cat.id).length;
+
+          // Don't show category tab if no project exists in it (e.g. backend if commented out)
+          if (count === 0 && cat.id !== 'all') return null;
+
+          const isActive = activeCategory === cat.id;
+
+          return (
+            <button
+              key={cat.id}
+              onClick={() => setActiveCategory(cat.id)}
+              className={`px-3.5 py-1.5 rounded-lg font-mono text-xs transition-all flex items-center gap-2 border ${
+                isActive
+                  ? 'bg-[#6DB33F]/15 border-[#6DB33F] text-[#85E042] shadow-[0_0_15px_rgba(109,179,63,0.25)]'
+                  : 'bg-white/5 border-white/10 text-slate-400 hover:text-slate-200 hover:border-white/20'
+              }`}
+            >
+              <span>{cat.label}</span>
+              <span
+                className={`text-[10px] px-1.5 py-0.2 rounded font-semibold ${
+                  isActive ? 'bg-[#6DB33F]/25 text-[#85E042]' : 'bg-white/10 text-slate-400'
+                }`}
+              >
+                {count}
+              </span>
+            </button>
+          );
+        })}
       </div>
+
+      {/* Projects Grid Container */}
+      <motion.div layout className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+        <AnimatePresence mode="popLayout">
+          {filteredProjects.map((project) => (
+            <ProjectCard key={project.id} project={project} onOpenModal={setSelectedProject} />
+          ))}
+        </AnimatePresence>
+      </motion.div>
 
       {/* Details Modal */}
       <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
