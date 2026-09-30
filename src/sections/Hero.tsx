@@ -52,7 +52,7 @@ export function Hero() {
             {/* Massive Display Title */}
             <div>
               <p className="font-mono text-sm sm:text-base text-[#6DB33F] font-semibold mb-2 tracking-wider">
-                // BACKEND DEVELOPER &amp; ENGINEER
+                // BACKEND &amp; MOBILE SYSTEMS ENGINEER
               </p>
               <h1 className="font-sans text-6xl sm:text-7xl lg:text-[88px] xl:text-[96px] font-black leading-[0.96] tracking-tighter uppercase drop-shadow-2xl">
                 <span className="text-[#6DB33F] block drop-shadow-[0_0_35px_rgba(109,179,63,0.35)]">HOANG</span>
@@ -61,7 +61,7 @@ export function Hero() {
               
               {/* Visual Bridge Slogan (5-7 words) */}
               <p className="font-mono text-sm sm:text-base text-slate-300 font-medium tracking-wide mt-4 flex items-center gap-2">
-                <span className="text-[#6DB33F] font-bold animate-pulse">&gt;</span> Architecting high-concurrency backend systems.
+                <span className="text-[#6DB33F] font-bold animate-pulse">&gt;</span> Architecting high-concurrency systems &amp; modern apps.
               </p>
             </div>
 

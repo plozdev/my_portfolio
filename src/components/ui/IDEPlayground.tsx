@@ -26,7 +26,7 @@ const PROFILE_COMMANDS: CommandItem[] = [
     type: 'key-value',
     items: [
       { label: 'name', value: 'Hoang Mai' },
-      { label: 'role', value: 'Backend Developer', highlight: true },
+      { label: 'role', value: 'Backend & Mobile Engineer', highlight: true },
       { label: 'born', value: '01 Jul 2006' },
       { label: 'location', value: 'Ho Chi Minh City, Vietnam' },
     ],
@@ -35,9 +35,9 @@ const PROFILE_COMMANDS: CommandItem[] = [
     command: 'stack',
     type: 'lines',
     lines: [
-      { text: 'Java · Spring Boot · Microservices', primary: true },
-      { text: 'PostgreSQL · Redis · Apache Kafka' },
-      { text: 'Docker · Kubernetes · GCP · Git' },
+      { text: 'Java · Spring Boot · PostgreSQL · Docker', primary: true },
+      { text: 'Kotlin · Jetpack Compose · KMP · Android SDK', highlight: true },
+      { text: 'Google Gemini AI · React · TypeScript · Git' },
     ],
   },
   {
@@ -55,8 +55,8 @@ const PROFILE_COMMANDS: CommandItem[] = [
     command: 'focus',
     type: 'lines',
     lines: [
-      { text: 'backend engineering', highlight: true },
-      { text: 'high-concurrency systems' },
+      { text: 'backend & distributed systems', highlight: true },
+      { text: 'native android & ai integrations' },
     ],
   },
 ];
@@ -213,7 +213,7 @@ export function ProfileTerminal() {
                           {line.primary ? (
                             <span>
                               <span className="text-[#6DB33F] font-bold">Java</span> ·{' '}
-                              <span className="text-[#6DB33F] font-bold">Spring Boot</span> · Microservices
+                              <span className="text-[#6DB33F] font-bold">Spring Boot</span> · PostgreSQL · Docker
                             </span>
                           ) : (
                             line.text

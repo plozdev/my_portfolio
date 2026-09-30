@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+  <defs>
+    <linearGradient id="kmpGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7F52FF"/>
+      <stop offset="100%" stop-color="#C711E1"/>
+    </linearGradient>
+    <linearGradient id="kmpGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E4485D"/>
+      <stop offset="100%" stop-color="#C711E1"/>
+    </linearGradient>
+  </defs>
+  <polygon fill="url(#kmpGrad1)" points="48,0 0,48 48,48"/>
+  <polygon fill="url(#kmpGrad2)" points="0,0 24,0 0,24"/>
+  <polygon fill="#7F52FF" points="24,0 48,0 0,48 0,24"/>
+</svg>
