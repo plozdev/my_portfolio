@@ -212,7 +212,7 @@ export function ProfileTerminal() {
                         >
                           {line.primary ? (
                             <span>
-                              <span className="text-[#6DB33F] font-bold">Java 21</span> ·{' '}
+                              <span className="text-[#6DB33F] font-bold">Java</span> ·{' '}
                               <span className="text-[#6DB33F] font-bold">Spring Boot</span> · PostgreSQL · Docker
                             </span>
                           ) : (
