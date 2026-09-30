@@ -35,9 +35,9 @@ const PROFILE_COMMANDS: CommandItem[] = [
     command: 'stack',
     type: 'lines',
     lines: [
-      { text: 'Java 21 · Spring Boot · PostgreSQL · Redis', primary: true },
+      { text: 'Java 21 · Spring Boot · PostgreSQL · Docker', primary: true },
       { text: 'Kotlin · Jetpack Compose · KMP · Android SDK', highlight: true },
-      { text: 'Google Gemini AI · React · TypeScript · Docker' },
+      { text: 'Google Gemini AI · React · TypeScript · Git' },
     ],
   },
   {
@@ -213,7 +213,7 @@ export function ProfileTerminal() {
                           {line.primary ? (
                             <span>
                               <span className="text-[#6DB33F] font-bold">Java 21</span> ·{' '}
-                              <span className="text-[#6DB33F] font-bold">Spring Boot</span> · PostgreSQL · Redis
+                              <span className="text-[#6DB33F] font-bold">Spring Boot</span> · PostgreSQL · Docker
                             </span>
                           ) : (
                             line.text

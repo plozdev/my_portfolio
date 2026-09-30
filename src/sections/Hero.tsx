@@ -121,33 +121,6 @@ export function Hero() {
               </div>
             </div>
 
-            {/* Core Tech Stack Pills (Based on actual projects) */}
-            <div className="pt-1">
-              <span className="font-mono text-[11px] text-slate-400 uppercase tracking-wider block mb-2">
-                // CORE STACK &amp; ECOSYSTEM
-              </span>
-              <div className="flex flex-wrap gap-2 max-w-lg">
-                {[
-                  { name: 'Java 21', icon: '/logos/java.svg' },
-                  { name: 'Spring Boot', icon: '/logos/spring.svg' },
-                  { name: 'Kotlin', icon: '/logos/kotlin.svg' },
-                  { name: 'Jetpack Compose', icon: '/logos/compose.svg' },
-                  { name: 'Google Gemini', icon: '/logos/gemini.svg' },
-                  { name: 'PostgreSQL', icon: '/logos/postgresql.svg' },
-                  { name: 'React', icon: '/logos/react.svg' },
-                  { name: 'Docker', icon: '/logos/docker.svg' },
-                ].map((tech) => (
-                  <div
-                    key={tech.name}
-                    className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/5 border border-white/10 hover:border-[#6DB33F]/50 hover:bg-white/[0.08] transition-all font-mono text-[11px] text-slate-300"
-                  >
-                    <img src={tech.icon} alt={tech.name} className="w-3.5 h-3.5 object-contain" />
-                    <span>{tech.name}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
           </div>
 
           {/* RIGHT: 3D Perspective Volumetric Terminal Window */}
