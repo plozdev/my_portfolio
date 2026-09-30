@@ -64,12 +64,13 @@ const experiences: ExperienceItem[] = [
     summary:
       'Focused on software engineering fundamentals, algorithm design, and system architecture. Active in ICPC competitive programming, community leadership, and hackathons.',
     highlights: [
+      'Top 500 (Silver Tier) nationwide in AI Riser Vietnam 2026 (Anti-Scam & Inclusive Access tracks by GDG & Google) with project AnTâm.AI.',
       'Awarded 59th Place at the 2025 ICPC Asia Ho Chi Minh City Regional Contest.',
       "Awarded 18th Place at the 2025 ICPC Vietnam Southern Provincial Programming Contest.",
       'Won Third Prize at the FPTU AI Innovation Hackathon Summer 2025 with team Softelligence.',
       'Serving as Chapter Lead for Google Developer Groups on Campus (GDGoC) at FPTU, managing the community and organizing technical events for students.',
     ],
-    technologies: ['C', 'C++', 'Java', 'Spring Boot', 'Algorithms', 'Competitive Programming', 'Software Architecture', 'Git'],
+    technologies: ['Java', 'Spring Boot', 'Kotlin', 'Jetpack Compose', 'Google Gemini AI', 'C++', 'Algorithms', 'Competitive Programming', 'Git'],
     icon: 'domain',
     logoUrl: '/images/school/fpt-university.png',
   },
