@@ -65,10 +65,11 @@ const experiences: ExperienceItem[] = [
       'Focused on software engineering fundamentals, algorithm design, and system architecture. Active in ICPC competitive programming, community leadership, and hackathons.',
     highlights: [
       'Top 500 (Silver Tier) nationwide in AI Riser Vietnam 2026 (Anti-Scam & Inclusive Access tracks by GDG & Google) with project AnTâm.AI.',
+      'Southern Regional Lead, GDGoC Hackathon Vietnam 2026 (Feb 2026 – May 2026): Co-organized a nationwide hackathon engaging 300+ teams; led southern-region operations and partner coordination.',
+      'Serving as Chapter Lead for Google Developer Groups on Campus (GDGoC) at FPTU, managing the community and organizing technical events for students.',
       'Awarded 59th Place at the 2025 ICPC Asia Ho Chi Minh City Regional Contest.',
       "Awarded 18th Place at the 2025 ICPC Vietnam Southern Provincial Programming Contest.",
       'Won Third Prize at the FPTU AI Innovation Hackathon Summer 2025 with team Softelligence.',
-      'Serving as Chapter Lead for Google Developer Groups on Campus (GDGoC) at FPTU, managing the community and organizing technical events for students.',
     ],
     technologies: ['Java', 'Spring Boot', 'Kotlin', 'Jetpack Compose', 'Google Gemini AI', 'C++', 'Algorithms', 'Competitive Programming', 'Git'],
     icon: 'domain',
