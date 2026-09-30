@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowUpRight, Maximize2, Smartphone, Monitor } from 'lucide-react';
+import { ArrowUpRight, Maximize2, Smartphone, Monitor, Play } from 'lucide-react';
 import { AnimatedSection } from '@/components/ui/AnimatedSection';
 import { PROJECTS_LIST, PROJECT_CATEGORIES, type ProjectData } from '@/config/projects';
 import { ProjectModal } from '@/components/ui/ProjectModal';
@@ -27,6 +27,7 @@ function ProjectCard({ project, onOpenModal }: { project: ProjectData; onOpenMod
   };
 
   const resolvedUrl = getUrl();
+  const isMobileDisplay = project.isMobile && project.previewLayout !== 'banner';
 
   return (
     <motion.div
@@ -38,8 +39,8 @@ function ProjectCard({ project, onOpenModal }: { project: ProjectData; onOpenMod
       onClick={() => onOpenModal(project)}
       className="group relative rounded-2xl border border-white/10 bg-[#0d1117]/90 backdrop-blur-md overflow-hidden cursor-pointer hover:border-[#6DB33F]/70 hover:shadow-[0_15px_45px_rgba(0,0,0,0.85),0_0_30px_rgba(109,179,63,0.2)] transition-all duration-300 flex flex-col"
     >
-      {/* ── Image Preview Area: Mobile Frame Mockup vs Web Banner ── */}
-      {project.isMobile ? (
+      {/* ── Image Preview Area: Mobile Frame Mockup vs Web/System Banner ── */}
+      {isMobileDisplay ? (
         /* Mobile Project Showcase Area */
         <div className="relative h-64 sm:h-72 w-full bg-gradient-to-b from-[#091109] via-[#070b07] to-[#0d1117] overflow-hidden border-b border-white/10 flex items-center justify-center p-3">
           {/* Cyber Dot-Matrix Background Pattern */}
@@ -67,7 +68,7 @@ function ProjectCard({ project, onOpenModal }: { project: ProjectData; onOpenMod
               ) : (
                 <div className="w-full h-full p-2 flex flex-col justify-center items-center text-center font-mono text-[10px] text-slate-400 bg-[#0d1117]">
                   <Smartphone className="w-6 h-6 text-[#6DB33F] mb-1" />
-                  <span>KMP Mobile</span>
+                  <span>{project.platformLabel || 'KMP Mobile'}</span>
                 </div>
               )}
 
@@ -79,25 +80,31 @@ function ProjectCard({ project, onOpenModal }: { project: ProjectData; onOpenMod
             </div>
           </div>
 
-          {/* Device Category Badge in Corner */}
-          <div className="absolute top-3 right-3 z-20">
+          {/* Badges in Corners */}
+          <div className="absolute top-3 right-3 z-20 flex items-center gap-1.5">
+            {project.youtube && (
+              <span className="font-mono text-[9px] font-bold text-slate-950 bg-[#85E042] px-2 py-0.5 rounded-md flex items-center gap-1 shadow-[0_0_10px_rgba(109,179,63,0.4)]">
+                <Play className="w-2.5 h-2.5 fill-current" />
+                DEMO
+              </span>
+            )}
             <span className="font-mono text-[9px] font-bold text-slate-300 bg-[#0d1117]/90 border border-white/15 px-2 py-0.5 rounded-md flex items-center gap-1 backdrop-blur-md shadow">
               <Smartphone className="w-2.5 h-2.5 text-[#6DB33F]" />
-              KMP / Compose
+              {project.platformLabel || 'KMP / Compose'}
             </span>
           </div>
 
-          {/* Status Badge */}
           <div className="absolute top-3 left-3 z-20">
             <span className="font-mono text-[10px] font-bold text-[#6DB33F] bg-[#0d1117]/90 border border-[#6DB33F]/50 px-2.5 py-1 rounded-md uppercase tracking-wider shadow-md backdrop-blur-md">
               {project.status}
             </span>
           </div>
 
-          {/* Hover Overlay with Maximize Icon */}
-          <div className="absolute inset-0 bg-[#0d1117]/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center z-20 pointer-events-none">
-            <div className="w-12 h-12 rounded-full bg-[#6DB33F] text-slate-950 flex items-center justify-center shadow-[0_0_25px_rgba(109,179,63,0.8)] transform scale-75 group-hover:scale-100 transition-transform font-bold">
-              <Maximize2 className="w-5 h-5" />
+          {/* Hover Overlay with Action Button */}
+          <div className="absolute inset-0 bg-[#0d1117]/40 backdrop-blur-[1px] opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center z-20 pointer-events-none">
+            <div className="px-3.5 py-1.5 rounded-xl bg-[#6DB33F] text-slate-950 font-mono text-xs font-bold flex items-center gap-1.5 shadow-[0_0_25px_rgba(109,179,63,0.8)] transform scale-90 group-hover:scale-100 transition-transform">
+              <Maximize2 className="w-3.5 h-3.5" />
+              <span>EXPLORE APP</span>
             </div>
           </div>
         </div>
@@ -106,22 +113,35 @@ function ProjectCard({ project, onOpenModal }: { project: ProjectData; onOpenMod
         <div className="relative h-52 sm:h-60 w-full bg-[#070b07] overflow-hidden border-b border-white/10">
           {!hasError ? (
             <div className="relative w-full h-full overflow-hidden">
-              {/* Automatic Continuous Parallax Scroll Image Container */}
-              <motion.div
-                className="w-full h-full bg-cover"
-                style={{ backgroundImage: `url(${resolvedUrl})` }}
-                animate={{
-                  backgroundPosition: ['50% 0%', '50% 100%', '50% 100%', '50% 0%', '50% 0%'],
-                }}
-                transition={{
-                  duration: 12,
-                  ease: 'easeInOut',
-                  repeat: Infinity,
-                  times: [0, 0.45, 0.55, 0.95, 1],
-                }}
-              />
-
-              <img src={resolvedUrl} alt="" className="hidden" onError={handleImgError} />
+              {project.previewLayout === 'banner' ? (
+                <div className="w-full h-full relative overflow-hidden">
+                  <img
+                    src={resolvedUrl}
+                    alt={project.title}
+                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                    onError={handleImgError}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0d1117] via-transparent to-black/30 pointer-events-none" />
+                </div>
+              ) : (
+                <>
+                  {/* Automatic Continuous Parallax Scroll Image Container */}
+                  <motion.div
+                    className="w-full h-full bg-cover"
+                    style={{ backgroundImage: `url(${resolvedUrl})` }}
+                    animate={{
+                      backgroundPosition: ['50% 0%', '50% 100%', '50% 100%', '50% 0%', '50% 0%'],
+                    }}
+                    transition={{
+                      duration: 12,
+                      ease: 'easeInOut',
+                      repeat: Infinity,
+                      times: [0, 0.45, 0.55, 0.95, 1],
+                    }}
+                  />
+                  <img src={resolvedUrl} alt="" className="hidden" onError={handleImgError} />
+                </>
+              )}
 
               <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#6DB33F] to-transparent opacity-0 group-hover:opacity-100 transition-opacity z-20 pointer-events-none shadow-[0_0_15px_#6DB33F]" />
             </div>
@@ -151,10 +171,21 @@ function ProjectCard({ project, onOpenModal }: { project: ProjectData; onOpenMod
             </div>
           )}
 
-          <div className="absolute top-3 right-3 z-20">
+          {/* Badges in Corners */}
+          <div className="absolute top-3 right-3 z-20 flex items-center gap-1.5">
+            {project.youtube && (
+              <span className="font-mono text-[9px] font-bold text-slate-950 bg-[#85E042] px-2 py-0.5 rounded-md flex items-center gap-1 shadow-[0_0_12px_rgba(109,179,63,0.4)]">
+                <Play className="w-2.5 h-2.5 fill-current" />
+                DEMO
+              </span>
+            )}
             <span className="font-mono text-[9px] font-bold text-slate-300 bg-[#0d1117]/90 border border-white/15 px-2 py-0.5 rounded-md flex items-center gap-1 backdrop-blur-md shadow">
-              <Monitor className="w-2.5 h-2.5 text-[#6DB33F]" />
-              WEB APP
+              {project.isMobile ? (
+                <Smartphone className="w-2.5 h-2.5 text-[#6DB33F]" />
+              ) : (
+                <Monitor className="w-2.5 h-2.5 text-[#6DB33F]" />
+              )}
+              {project.platformLabel || 'WEB APP'}
             </span>
           </div>
 
@@ -164,9 +195,20 @@ function ProjectCard({ project, onOpenModal }: { project: ProjectData; onOpenMod
             </span>
           </div>
 
-          <div className="absolute inset-0 bg-[#0d1117]/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center z-10 pointer-events-none">
-            <div className="w-12 h-12 rounded-full bg-[#6DB33F] text-slate-950 flex items-center justify-center shadow-[0_0_25px_rgba(109,179,63,0.8)] transform scale-75 group-hover:scale-100 transition-transform font-bold">
-              <Maximize2 className="w-5 h-5" />
+          {/* Hover Overlay with Action Button */}
+          <div className="absolute inset-0 bg-[#0d1117]/40 backdrop-blur-[1px] opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center z-10 pointer-events-none">
+            <div className="px-3.5 py-1.5 rounded-xl bg-[#6DB33F] text-slate-950 font-mono text-xs font-bold flex items-center gap-1.5 shadow-[0_0_25px_rgba(109,179,63,0.8)] transform scale-90 group-hover:scale-100 transition-transform">
+              {project.youtube ? (
+                <>
+                  <Play className="w-3.5 h-3.5 fill-current" />
+                  <span>WATCH DEMO &amp; SPECS</span>
+                </>
+              ) : (
+                <>
+                  <Maximize2 className="w-3.5 h-3.5" />
+                  <span>VIEW DETAILS</span>
+                </>
+              )}
             </div>
           </div>
         </div>
@@ -232,7 +274,6 @@ export function Projects() {
               ? PROJECTS_LIST.length
               : PROJECTS_LIST.filter((p) => p.category === cat.id).length;
 
-          // Don't show category tab if no project exists in it (e.g. backend if commented out)
           if (count === 0 && cat.id !== 'all') return null;
 
           const isActive = activeCategory === cat.id;
