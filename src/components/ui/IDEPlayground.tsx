@@ -35,7 +35,7 @@ const PROFILE_COMMANDS: CommandItem[] = [
     command: 'stack',
     type: 'lines',
     lines: [
-      { text: 'Java 21 · Spring Boot · PostgreSQL · Docker', primary: true },
+      { text: 'Java · Spring Boot · PostgreSQL · Docker', primary: true },
       { text: 'Kotlin · Jetpack Compose · KMP · Android SDK', highlight: true },
       { text: 'Google Gemini AI · React · TypeScript · Git' },
     ],
