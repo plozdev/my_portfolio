@@ -58,13 +58,12 @@ const experiences: ExperienceItem[] = [
   },
   {
     company: 'FPT University Ho Chi Minh City',
-    role: 'Bachelor of Software Engineering (GPA: 8.2/10)',
+    role: 'Bachelor of Software Engineering',
     period: 'Sep 2024 – Aug 2027 (Exp)',
     location: 'Ho Chi Minh City, Vietnam',
     summary:
       'Focused on enterprise software engineering, algorithm design, and system architecture. Active in competitive programming, community leadership, and financial-security AI research.',
     highlights: [
-      'Recipient of the 70% FPT University Talent Scholarship for academic excellence.',
       'Awarded 59th Place at the 2025 ICPC Asia Ho Chi Minh City Regional Contest.',
       'Awarded 18th Place at the 2025 ICPC Southern Provincial & Top 171 at the ICPC Vietnam National Contest.',
       'Top 500 Nationwide in AI Riser Vietnam 2026 (organized by Google & GDG) with project AnTâm.AI.',
