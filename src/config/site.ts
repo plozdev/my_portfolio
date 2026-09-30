@@ -5,4 +5,5 @@ export const siteConfig = {
   siteUrl: "https://plozdev.github.io/my_portfolio/",
   email: "hoangmai.it.dev@gmail.com",
   location: "Ho Chi Minh City, Vietnam",
+  resumeUrl: "https://drive.google.com/file/d/18ML1uv2ykGdDVoisrFXpMcuidV5Aoxul/view?usp=sharing",
 };

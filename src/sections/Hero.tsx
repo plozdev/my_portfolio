@@ -1,4 +1,5 @@
 import { Suspense, lazy } from 'react';
+import { siteConfig } from '@/config/site';
 import { InteractiveTerminal3D } from '@/components/ui/InteractiveTerminal3D';
 
 const SystemNetwork = lazy(() => import('@/components/three/SystemNetwork'));
@@ -69,7 +70,7 @@ export function Hero() {
             <div className="pt-2 space-y-3.5 w-full sm:w-[370px]">
               {/* Primary White Resume Button (60% Visual Anchor) */}
               <a
-                href="/documents/resume.pdf"
+                href={siteConfig.resumeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full h-12 bg-white hover:bg-slate-200 text-slate-950 font-bold rounded-xl shadow-[0_4px_20px_rgba(255,255,255,0.25)] hover:shadow-[0_6px_28px_rgba(255,255,255,0.4)] transition-all text-sm flex items-center justify-center gap-2.5 group"
